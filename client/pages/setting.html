@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Settings - Rudraksha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* Background */
+
+body{
+display:flex;
+background:linear-gradient(135deg,#eef2ff,#e0e7ff,#f6f8ff);
+min-height:100vh;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:230px;
+background:white;
+height:100vh;
+padding:25px;
+box-shadow:2px 0 15px rgba(0,0,0,.08);
+}
+
+.logo{
+font-weight:600;
+font-size:18px;
+margin-bottom:30px;
+color:#ff7a00;
+}
+
+.menu a{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px;
+margin-bottom:8px;
+text-decoration:none;
+color:#333;
+border-radius:8px;
+transition:.3s;
+}
+
+.menu a:hover{
+background:#fff3e6;
+color:#ff7a00;
+transform:translateX(5px);
+}
+
+.menu a.active{
+background:linear-gradient(90deg,#ff7a00,#ff9a3c);
+color:white;
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:35px;
+}
+
+.main h1{
+margin-bottom:5px;
+}
+
+.main p{
+color:#666;
+margin-bottom:25px;
+}
+
+/* Cards */
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:25px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.card h3{
+margin-bottom:20px;
+}
+
+/* Form */
+
+label{
+display:block;
+margin-bottom:6px;
+margin-top:10px;
+font-size:14px;
+font-weight:500;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+background:#fafbff;
+transition:.3s;
+}
+
+input:focus,textarea:focus{
+border-color:#ff7a00;
+outline:none;
+box-shadow:0 0 0 3px rgba(255,122,0,.15);
+}
+
+/* Button */
+
+button{
+margin-top:15px;
+background:linear-gradient(45deg,#ff7a00,#ff9d40);
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+cursor:pointer;
+font-weight:500;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 10px 20px rgba(255,122,0,.3);
+}
+
+/* Notification Toggle */
+
+.setting-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 0;
+border-bottom:1px solid #eee;
+}
+
+/* Toggle Switch */
+
+.switch{
+position:relative;
+display:inline-block;
+width:45px;
+height:22px;
+}
+
+.switch input{
+opacity:0;
+width:0;
+height:0;
+}
+
+.slider{
+position:absolute;
+cursor:pointer;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:#ccc;
+transition:.4s;
+border-radius:30px;
+}
+
+.slider:before{
+position:absolute;
+content:"";
+height:16px;
+width:16px;
+left:3px;
+bottom:3px;
+background:white;
+transition:.4s;
+border-radius:50%;
+}
+
+input:checked + .slider{
+background:#ff7a00;
+}
+
+input:checked + .slider:before{
+transform:translateX(22px);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="logo">RC Rudraksha</div>
+
+<div class="menu">
+<a href="index.html"><i class="fa fa-chart-line"></i> Dashboard</a>
+<a href="students.html"><i class="fa fa-user-graduate"></i> Students</a>
+<a href="courses.html"><i class="fa fa-book"></i> Courses</a>
+<a href="packages.html"><i class="fa fa-box"></i> Packages</a>
+<a href="attendance.html"><i class="fa fa-calendar-check"></i> Attendance</a>
+<a href="report.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+<a href="setting.html" class="active"><i class="fa fa-gear"></i> Settings</a>
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<h1>Settings</h1>
+<p>Manage your institute settings and preferences</p>
+
+<!-- Institute Info -->
+
+<div class="card">
+
+<h3><i class="fa fa-building"></i> Institute Information</h3>
+
+<label>Institute Name</label>
+<input type="text" id="instituteName" placeholder="Enter institute name">
+
+<label>Email</label>
+<input type="email" id="instituteEmail" placeholder="Enter email">
+
+<label>Phone</label>
+<input type="text" id="institutePhone" placeholder="Enter phone number">
+
+<label>Address</label>
+<textarea id="instituteAddress" rows="3" placeholder="Enter institute address"></textarea>
+
+<button onclick="saveSettings()"><i class="fa fa-save"></i> Save Changes</button>
+
+</div>
+
+<!-- Notifications -->
+
+<div class="card">
+
+<h3><i class="fa fa-bell"></i> Notifications</h3>
+
+<div class="setting-item">
+<span>Email Notifications</span>
+<label class="switch">
+<input type="checkbox" id="emailNotifications">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting-item">
+<span>SMS Alerts</span>
+<label class="switch">
+<input type="checkbox" id="smsAlerts">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting-item">
+<span>Attendance Alerts</span>
+<label class="switch">
+<input type="checkbox" id="attendanceAlerts">
+<span class="slider"></span>
+</label>
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+<script src="../api.js"></script>
+
+<script>
+
+if(!localStorage.getItem("token")){
+  window.location.href="login.html";
+}
+
+document.addEventListener("DOMContentLoaded", loadSettings);
+
+async function loadSettings(){
+  const result = await API.settings.get();
+  if(result.success && result.settings){
+    const settings = result.settings;
+    document.getElementById("instituteName").value = settings.instituteName || "";
+    document.getElementById("instituteEmail").value = settings.email || "";
+    document.getElementById("institutePhone").value = settings.phone || "";
+    document.getElementById("instituteAddress").value = settings.address || "";
+    document.getElementById("emailNotifications").checked = settings.notifications?.email ?? true;
+    document.getElementById("smsAlerts").checked = settings.notifications?.sms ?? false;
+    document.getElementById("attendanceAlerts").checked = settings.notifications?.attendance ?? false;
+  }
+}
+
+async function saveSettings(){
+  const settingsData = {
+    instituteName: document.getElementById("instituteName").value,
+    email: document.getElementById("instituteEmail").value,
+    phone: document.getElementById("institutePhone").value,
+    address: document.getElementById("instituteAddress").value,
+    notifications: {
+      email: document.getElementById("emailNotifications").checked,
+      sms: document.getElementById("smsAlerts").checked,
+      attendance: document.getElementById("attendanceAlerts").checked
+    }
+  };
+  
+  const result = await API.settings.update(settingsData);
+  
+  if(result.success){
+    alert("Settings saved successfully");
+  } else {
+    alert("Error saving settings: " + result.message);
+  }
+}
+
+</script>
+
+</html>
+```

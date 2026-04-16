@@ -1,0 +1,36 @@
+
+✅ MongoDB Connected
+
+📊 Total students in Student collection: 13
+
+📋 Student Details:
+  1. Name: Meera patil, Email: meerapatil@gmail.com, Course: 69d1589a159f7e7fda3b836b
+  2. Name: Tanu vaishya, Email: tanuvaishya398@gmail.com, Course: 69d14fa3ca0abd10cbaf691f
+  3. Name: rutik jadhav, Email: rutikjadhav@gmail.com, Course: 69d15ebd8ee75c41e6085e7f
+
+📊 Total students in StudentAuth collection: 1
+
+👥 Using StudentAuth:
+  1. Name: Sanvi jagtap, Email: sanvijagtap55@gmail.com
+
+🔑 Creating token for: sanvijagtap55@gmail.com
+
+🌐 Making request to: GET /api/student/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6Ik...
+
+✅ Response Status: 200
+
+📤 RESPONSE DATA:
+{
+  "success": true,
+  "student": {
+    "id": "69d45c456b360a408e58d262",
+    "email": "sanvijagtap55@gmail.com",
+    "iat": 1775539291,
+    "exp": 1775542891
+  }
+}
+
+⏳ Waiting 2 seconds for server logs...
+
+✅ Test Complete - Check debug_logs.txt for captured output

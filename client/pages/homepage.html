@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Computer Class</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#eef2ff,#f8fafc);
+color:#333;
+}
+
+/* HERO */
+
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:90px 8%;
+flex-wrap:wrap;
+}
+
+.hero-text{
+max-width:520px;
+animation:fadeUp 1s ease;
+}
+
+.hero-text h1{
+font-size:48px;
+margin-bottom:20px;
+line-height:1.2;
+}
+
+.hero-text p{
+color:#555;
+margin-bottom:25px;
+}
+
+.hero-btns button{
+padding:13px 22px;
+border:none;
+border-radius:8px;
+margin-right:10px;
+cursor:pointer;
+font-weight:500;
+transition:.3s;
+}
+
+.primary{
+background:#2563eb;
+color:white;
+}
+
+.primary:hover{
+background:#1e4ed8;
+transform:translateY(-3px);
+}
+
+.secondary{
+background:white;
+border:1px solid #2563eb;
+color:#2563eb;
+}
+
+.secondary:hover{
+background:#2563eb;
+color:white;
+}
+
+.hero img{
+width:340px;
+border-radius:12px;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+animation:float 4s ease-in-out infinite;
+}
+
+/* SECTION */
+
+.section{
+padding:70px 8%;
+text-align:center;
+}
+
+.section h2{
+font-size:30px;
+margin-bottom:10px;
+}
+
+.section p{
+color:#666;
+margin-bottom:40px;
+}
+
+/* COURSES */
+
+.course-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.course{
+background:white;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+overflow:hidden;
+transition:.4s;
+}
+
+.course:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+.course img{
+width:100%;
+height:170px;
+object-fit:cover;
+}
+
+.course-body{
+padding:20px;
+text-align:left;
+}
+
+.course-body i{
+color:#2563eb;
+font-size:20px;
+margin-bottom:10px;
+}
+
+.learn-btn{
+margin-top:12px;
+padding:9px 16px;
+border:1px solid #2563eb;
+background:white;
+color:#2563eb;
+border-radius:6px;
+cursor:pointer;
+transition:.3s;
+}
+
+.learn-btn:hover{
+background:#2563eb;
+color:white;
+}
+
+/* FEATURES */
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.feature{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.05);
+transition:.3s;
+}
+
+.feature:hover{
+transform:translateY(-6px);
+}
+
+.feature i{
+font-size:28px;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+/* STATS */
+
+.stats{
+background:linear-gradient(90deg,#2563eb,#4f7df3);
+color:white;
+display:flex;
+justify-content:space-around;
+padding:35px;
+border-radius:10px;
+margin-top:40px;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.stats div{
+text-align:center;
+animation:fadeUp 1.5s ease;
+}
+
+/* TESTIMONIALS */
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.testimonial{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.testimonial img{
+width:45px;
+height:45px;
+border-radius:50%;
+margin-top:10px;
+}
+
+/* CTA */
+
+.cta{
+background:linear-gradient(90deg,#2563eb,#4f7df3);
+color:white;
+text-align:center;
+padding:70px 8%;
+margin-top:60px;
+}
+
+.cta button{
+margin-top:20px;
+padding:13px 25px;
+border:none;
+background:white;
+color:#2563eb;
+border-radius:8px;
+cursor:pointer;
+font-weight:500;
+transition:.3s;
+}
+
+.cta button:hover{
+transform:scale(1.05);
+}
+
+/* FOOTER */
+
+.footer{
+background:#0f172a;
+color:white;
+padding:45px 8%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+}
+
+.footer p{
+color:#cbd5e1;
+font-size:14px;
+}
+
+.copy{
+text-align:center;
+background:#020617;
+color:#cbd5e1;
+padding:15px;
+font-size:14px;
+}
+
+/* ANIMATIONS */
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>Start Your Career in Technology</h1>
+
+<p>Learn practical computer skills from experienced trainers and build your future in programming, web development, AI and data science.</p>
+
+<div class="hero-btns">
+<button class="primary">Explore Courses</button>
+<button class="secondary" onclick="window.location.href='choice.html'">Join Now</button>
+</div>
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+
+</section>
+
+<!-- COURSES -->
+
+<section class="section">
+
+<h2>Popular Courses</h2>
+<p>Choose from industry-relevant courses designed for career growth.</p>
+
+<div class="course-grid">
+
+<div class="course">
+<img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97">
+<div class="course-body">
+<i class="fa-solid fa-code"></i>
+<h4>Programming Fundamentals</h4>
+<p>Learn Python, C and Java with strong coding foundations.</p>
+<button class="learn-btn">Learn More</button>
+</div>
+</div>
+
+<div class="course">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085">
+<div class="course-body">
+<i class="fa-solid fa-globe"></i>
+<h4>Web Development</h4>
+<p>Build responsive websites using HTML, CSS and JavaScript.</p>
+<button class="learn-btn">Learn More</button>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- WHY CHOOSE -->
+
+<section class="section">
+
+<h2>Why Choose Our Institute</h2>
+
+<div class="features">
+
+<div class="feature">
+<i class="fa-solid fa-user-graduate"></i>
+<h4>Experienced Trainers</h4>
+<p>Learn from professionals with industry experience.</p>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-laptop-code"></i>
+<h4>Practical Learning</h4>
+<p>Hands-on projects to build real skills.</p>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-certificate"></i>
+<h4>Certification</h4>
+<p>Recognized certificates for your career.</p>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-briefcase"></i>
+<h4>Job Assistance</h4>
+<p>Career guidance and placement support.</p>
+</div>
+
+</div>
+
+<div class="stats">
+
+<div>
+<h2>5000+</h2>
+<p>Students Trained</p>
+</div>
+
+<div>
+<h2>50+</h2>
+<p>Courses Offered</p>
+</div>
+
+<div>
+<h2>100+</h2>
+<p>Projects Completed</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section class="section">
+
+<h2>What Our Students Say</h2>
+
+<div class="testimonials">
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<p>The web development course helped me get my first job.</p>
+<strong>Rahul Sharma</strong><br>
+<img src="https://randomuser.me/api/portraits/men/32.jpg">
+</div>
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<p>Excellent curriculum and practical projects.</p>
+<strong>Priya Sharma</strong><br>
+<img src="https://randomuser.me/api/portraits/women/44.jpg">
+</div>
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<p>Best decision for learning programming.</p>
+<strong>Michael Chen</strong><br>
+<img src="https://randomuser.me/api/portraits/men/12.jpg">
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+<h2>Ready to Start Your Learning Journey?</h2>
+
+<p>Join thousands of students who transformed their careers.</p>
+
+<button>Enroll Now</button>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div>
+<h3>Computer Class</h3>
+<p>Empowering students with practical technology skills.</p>
+</div>
+
+<div>
+<h4>Quick Links</h4>
+<p>Home</p>
+<p>Courses</p>
+<p>About</p>
+</div>
+
+<div>
+<h4>Popular Courses</h4>
+<p>Programming</p>
+<p>Web Development</p>
+<p>Data Science</p>
+</div>
+
+<div>
+<h4>Contact</h4>
+<p>123 Tech Street</p>
+<p>+91 9876543210</p>
+<p>info@computerclass.com</p>
+</div>
+
+</footer>
+
+<div class="copy">
+© 2026 Computer Class. All rights reserved.
+</div>
+
+</body>
+</html>

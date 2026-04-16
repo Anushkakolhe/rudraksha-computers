@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Choose Role - Rudraksha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#4f46e5,#6366f1,#818cf8);
+}
+
+/* Container */
+
+.container{
+text-align:center;
+color:white;
+}
+
+.container h1{
+margin-bottom:10px;
+font-size:34px;
+}
+
+.container p{
+margin-bottom:40px;
+opacity:0.9;
+}
+
+/* Cards */
+
+.role-container{
+display:flex;
+gap:40px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.role-card{
+background:white;
+width:260px;
+padding:35px 25px;
+border-radius:15px;
+text-align:center;
+color:#333;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+transition:0.3s;
+cursor:pointer;
+}
+
+.role-card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 15px 40px rgba(0,0,0,0.25);
+}
+
+/* Icon */
+
+.role-icon{
+font-size:45px;
+color:#4f46e5;
+margin-bottom:15px;
+}
+
+/* Button */
+
+.role-btn{
+margin-top:20px;
+padding:10px 20px;
+border:none;
+border-radius:6px;
+background:#4f46e5;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.role-btn:hover{
+background:#4338ca;
+}
+
+/* Footer */
+
+.footer{
+margin-top:40px;
+font-size:14px;
+opacity:0.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Welcome to Rudraksha</h1>
+<p>Select how you want to continue</p>
+
+<div class="role-container">
+
+<!-- Student -->
+
+<div class="role-card" onclick="location.href='stud_login.html'">
+
+<div class="role-icon">
+<i class="fa-solid fa-user-graduate"></i>
+</div>
+
+<h3>Student</h3>
+
+<p>Access your courses, assignments, progress and certificates.</p>
+
+<button class="role-btn">Continue as Student</button>
+
+</div>
+
+<!-- Owner -->
+
+<div class="role-card" onclick="location.href='login.html'">
+
+<div class="role-icon">
+<i class="fa-solid fa-user-shield"></i>
+</div>
+
+<h3>Owner / Admin</h3>
+
+<p>Manage students, courses, attendance and institute dashboard.</p>
+
+<button class="role-btn">Continue as Owner</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 Rudraksha Computer Institute
+</div>
+
+</div>
+
+</body>
+</html>

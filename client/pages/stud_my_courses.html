@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Courses - Rudraksha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+display:flex;
+background:#f5f7fb;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:230px;
+background:white;
+height:100vh;
+padding:25px;
+box-shadow:2px 0 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-size:20px;
+font-weight:600;
+margin-bottom:30px;
+color:#ff7a00;
+}
+
+.menu a{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px;
+margin-bottom:10px;
+text-decoration:none;
+color:#333;
+border-radius:8px;
+transition:0.3s;
+}
+
+.menu a:hover{
+background:#fff3e6;
+color:#ff7a00;
+}
+
+.menu a.active{
+background:#ff7a00;
+color:white;
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:30px;
+}
+
+.header{
+margin-bottom:25px;
+}
+
+.header h2{
+margin-bottom:5px;
+}
+
+/* Course Grid */
+
+.course-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+/* Course Card */
+
+.card{
+background:white;
+border-radius:12px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h3{
+margin-bottom:6px;
+}
+
+.instructor{
+font-size:14px;
+color:#666;
+margin-bottom:10px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+font-size:14px;
+margin-bottom:10px;
+}
+
+.progress-bar{
+background:#eee;
+height:8px;
+border-radius:10px;
+overflow:hidden;
+margin-bottom:12px;
+}
+
+.progress{
+height:8px;
+background:#ff7a00;
+}
+
+.btn{
+background:#ff7a00;
+color:white;
+border:none;
+padding:10px;
+width:100%;
+border-radius:8px;
+cursor:pointer;
+}
+
+.btn:hover{
+background:#e86c00;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="logo">RC Rudraksha</div>
+
+<div class="menu">
+
+<a href="stud_dashboard.html"><i class="fa fa-chart-line"></i> Dashboard</a>
+
+<a href="stud_my_courses.html" class="active"><i class="fa fa-book"></i> My Courses</a>
+
+<a href="stud_attendance.html"><i class="fa fa-calendar-check"></i> Attendance</a>
+
+<a href="stud_progres.html"><i class="fa fa-chart-bar"></i> Progress</a>
+
+<a href="stud_assignment.html"><i class="fa fa-file"></i> Assignments</a>
+
+<a href="stud_profile.html"><i class="fa fa-user"></i> Profile</a>
+
+<a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+
+<h2>My Courses</h2>
+
+<p>Continue learning your enrolled courses</p>
+
+</div>
+
+<div class="course-grid" id="courseGrid"></div>
+
+</div>
+
+<script>
+
+async function loadCourses() {
+  try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login again");
+      return;
+    }
+
+    const res = await fetch('http://localhost:5000/api/student/dashboard', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    const data = await res.json();
+
+    console.log("COURSE DATA:", data);
+
+    const grid = document.getElementById("courseGrid");
+    grid.innerHTML = "";
+
+    const courses = data.courses || data.enrolledCourses || [];
+    console.log("COURSES LIST:", courses);
+
+    if (!courses || courses.length === 0) {
+      grid.innerHTML = "<p>No courses enrolled</p>";
+      return;
+    }
+
+    console.log("[LOAD COURSES] Total courses to render:", courses.length);
+    courses.forEach((course, idx) => {
+      console.log(`\n[COURSE ${idx}] FULL OBJECT:`, course);
+      
+      // Normalize course data structure - CRITICAL: use courseId for unique identification
+      const courseId = course.courseId || course._id || "";
+      const name = course.name || course.courseName || course.title || "Unknown Course";
+      
+      // Load saved progress from localStorage, fallback to backend progress
+      const savedProgress = courseId ? localStorage.getItem("progress_" + courseId) : null;
+      const progress = savedProgress !== null 
+        ? Math.min(Number(savedProgress), 100)
+        : Math.min(Number(course.progress) || 0, 100);
+      
+      const duration = course.duration || "Not Available";
+      const fees = course.feesPaid || course.fees || 0;
+      
+      console.log(`[COURSE ${idx}] EXTRACTED:`, {
+        courseId: courseId,
+        name: name,
+        duration: duration,
+        fees: fees,
+        progress: progress,
+        "_id_matches_courseId": courseId === (course._id || course.courseId)
+      });
+
+      grid.innerHTML += `
+        <div class="card">
+          <h3>${name}</h3>
+
+          <div class="instructor">
+            Fees Paid: ₹${fees}
+          </div>
+
+          <div class="row">
+            <span>Duration</span>
+            <span>${duration}</span>
+          </div>
+
+          <div class="row">
+            <span>Progress</span>
+            <span>${progress}%</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress" style="width:${progress}%"></div>
+          </div>
+
+          <button class="btn" onclick="continueLearning('${courseId.replace(/'/g, "\\'")}')">
+            Continue Learning
+          </button>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error("Error loading courses:", err);
+    alert("Unable to load courses");
+  }
+}
+
+function continueLearning(courseId) {
+  console.log("SELECTED COURSE ID:", courseId);
+
+  // store selected course
+  localStorage.setItem("selectedCourseId", courseId);
+
+  // redirect
+  window.location.href = "stud_continue_learning.html";
+}
+
+// Listen for progress updates from other pages and refresh
+window.addEventListener("progressUpdated", () => {
+  console.log("[SYNC] Progress updated in another page, reloading...");
+  location.reload();
+});
+
+loadCourses();
+
+</script>
+
+</body>
+</html>

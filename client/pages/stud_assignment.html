@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Assignments - Rudraksha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+display:flex;
+background:linear-gradient(135deg,#eef2ff,#e0e7ff,#f6f8ff);
+}
+
+/* Sidebar */
+
+.sidebar{
+width:230px;
+background:white;
+height:100vh;
+padding:25px;
+box-shadow:2px 0 15px rgba(0,0,0,.08);
+}
+
+.logo{
+font-weight:600;
+font-size:18px;
+margin-bottom:30px;
+color:#ff7a00;
+}
+
+.menu a{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px;
+margin-bottom:8px;
+text-decoration:none;
+color:#333;
+border-radius:8px;
+transition:.3s;
+}
+
+.menu a:hover{
+background:#fff3e6;
+color:#ff7a00;
+transform:translateX(5px);
+}
+
+.menu a.active{
+background:linear-gradient(90deg,#ff7a00,#ff9a3c);
+color:white;
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:35px;
+}
+
+.main h1{
+margin-bottom:5px;
+}
+
+.main p{
+color:#666;
+margin-bottom:25px;
+}
+
+/* Cards */
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:25px;
+}
+
+/* Daily Tasks */
+
+.task{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+.task:last-child{
+border-bottom:none;
+}
+
+.task button{
+padding:6px 10px;
+border:none;
+background:#4CAF50;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* Assignment Table */
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#f7f9fc;
+padding:12px;
+text-align:left;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+.status{
+font-weight:500;
+}
+
+.pending{
+color:#ff9800;
+}
+
+.submitted{
+color:green;
+}
+
+.overdue{
+color:red;
+}
+
+/* Upload Button */
+
+.upload-btn{
+padding:8px 12px;
+background:#2979ff;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* Feedback */
+
+.feedback{
+background:#f7f9fc;
+padding:12px;
+border-radius:8px;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="logo">RC Rudraksha</div>
+
+<div class="menu">
+
+<a href="stud_dashboard.html"><i class="fa fa-chart-line"></i> Dashboard</a>
+
+<a href="stud_my_courses.html"><i class="fa fa-book"></i> My Courses</a>
+
+<a href="stud_attendance.html"><i class="fa fa-calendar-check"></i> Attendance</a>
+
+<a href="stud_progres.html"><i class="fa fa-chart-bar"></i> Progress</a>
+
+<a href="stud_assignment.html" class="active"><i class="fa fa-file"></i> Assignments</a>
+
+<a href="stud_progres.html"><i class="fa fa-user"></i> Profile</a>
+
+<a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<h1>Assignments & Daily Tasks</h1>
+<p>Complete tasks and submit assignments before deadline</p>
+
+<!-- Daily Tasks -->
+
+<div class="card">
+
+<h3 style="margin-bottom:15px">Today's Tasks</h3>
+
+<div class="task">
+<span>Practice HTML Tags</span>
+<button>Complete</button>
+</div>
+
+<div class="task">
+<span>Create Simple Web Page</span>
+<button>Complete</button>
+</div>
+
+<div class="task">
+<span>Study CSS Selectors</span>
+<button>Complete</button>
+</div>
+
+</div>
+
+<!-- Assignments -->
+
+<div class="card">
+
+<h3 style="margin-bottom:15px">Course Assignments</h3>
+
+<table>
+
+<tr>
+<th>Assignment</th>
+<th>Course</th>
+<th>Due Date</th>
+<th>Status</th>
+<th>Upload</th>
+</tr>
+
+<tr>
+<td>HTML Portfolio Page</td>
+<td>Web Development</td>
+<td>15 Mar</td>
+<td class="status pending">Pending</td>
+<td><button class="upload-btn">Upload</button></td>
+</tr>
+
+<tr>
+<td>CSS Layout Design</td>
+<td>Web Development</td>
+<td>18 Mar</td>
+<td class="status submitted">Submitted</td>
+<td><button class="upload-btn">View</button></td>
+</tr>
+
+<tr>
+<td>Python Calculator Program</td>
+<td>Python Programming</td>
+<td>20 Mar</td>
+<td class="status overdue">Overdue</td>
+<td><button class="upload-btn">Upload</button></td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- Teacher Feedback -->
+
+<div class="card">
+
+<h3 style="margin-bottom:15px">Teacher Feedback</h3>
+
+<div class="feedback">
+
+<strong>CSS Layout Design</strong>
+
+<p>Good work! Improve responsiveness for mobile devices.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Course</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* Modern Gradient Background */
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#eef2ff,#e0e7ff,#f0f9ff);
+}
+
+/* Main Container */
+
+.main{
+width:450px;
+}
+
+/* Form Card */
+
+.form-card{
+background:white;
+padding:35px;
+border-radius:18px;
+box-shadow:0 15px 35px rgba(0,0,0,0.08);
+transition:0.3s;
+border:1px solid rgba(0,0,0,0.04);
+}
+
+.form-card:hover{
+transform:translateY(-6px);
+box-shadow:0 20px 40px rgba(0,0,0,0.12);
+}
+
+.form-card h2{
+margin-bottom:20px;
+color:#333;
+}
+
+/* Inputs */
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border-radius:10px;
+border:1px solid #ddd;
+transition:0.3s;
+background:#fafbff;
+}
+
+input:focus,textarea:focus{
+border-color:#ff7a00;
+box-shadow:0 0 0 3px rgba(255,122,0,0.15);
+outline:none;
+}
+
+/* Button */
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:linear-gradient(45deg,#ff7a00,#ff9d40);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 10px 20px rgba(255,122,0,0.3);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="form-card">
+
+<h2><i class="fa-solid fa-book"></i> Add New Course</h2>
+
+<form>
+
+<input type="text" placeholder="Course Name">
+
+<textarea placeholder="Course Description"></textarea>
+
+<input type="text" placeholder="Instructor Name">
+
+<input type="text" placeholder="Duration (Example: 3 Months)">
+
+<input type="number" placeholder="Course Price">
+
+<textarea placeholder="Course Content"></textarea>
+
+<button><i class="fa-solid fa-plus"></i> Add Course</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

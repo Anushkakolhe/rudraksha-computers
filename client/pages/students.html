@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Students - Rudraksha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+display:flex;
+background:#f4f6f9;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:240px;
+background:#fff;
+height:100vh;
+padding:25px 20px;
+box-shadow:2px 0 12px rgba(0,0,0,0.05);
+position:relative;
+}
+
+.logo{
+font-size:20px;
+font-weight:600;
+margin-bottom:35px;
+color:#ff7a00;
+}
+
+.menu{
+list-style:none;
+}
+
+.menu li{
+margin-bottom:8px;
+}
+.menu li a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 14px;
+border-radius:8px;
+text-decoration:none;
+color:#555;
+font-size:15px;
+transition:0.3s;
+}
+ 
+.menu li a i{
+font-size:16px;
+}
+
+/* Active */
+
+.menu li.active a{
+background:#fde6cf;
+color:#ff7a00;
+font-weight:500;
+}
+
+.menu li:hover a{
+background:#fde6cf;
+color:#ff7a00;
+transform:translateX(5px);
+}
+
+.admin-box{
+position:absolute;
+bottom:20px;
+left:20px;
+right:20px;
+background:#f4f6f9;
+padding:10px;
+border-radius:8px;
+font-size:13px;
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:30px;
+}
+
+/* Header */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.add-btn{
+background:#ff7a00;
+color:#fff;
+border:none;
+padding:12px 18px;
+border-radius:8px;
+cursor:pointer;
+font-weight:500;
+transition:0.3s;
+}
+
+.add-btn:hover{
+background:#e66800;
+transform:scale(1.05);
+}
+
+/* Search */
+
+.search-bar{
+background:#fff;
+padding:15px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+display:flex;
+gap:15px;
+margin-bottom:20px;
+}
+
+.search-bar input{
+flex:1;
+padding:10px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+/* Table */
+
+.table-box{
+background:#fff;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+overflow:hidden;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:15px;
+text-align:left;
+font-size:14px;
+}
+
+th{
+background:#fafafa;
+color:#777;
+}
+
+tr{
+border-bottom:1px solid #eee;
+transition:0.3s;
+}
+
+tr:hover{
+background:#fff6ef;
+transform:scale(1.01);
+}
+
+.student{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+background:#ff7a00;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:600;
+}
+
+/* Progress */
+
+.progress{
+background:#eee;
+border-radius:10px;
+height:8px;
+width:100px;
+}
+
+.progress-bar{
+background:#ff7a00;
+height:8px;
+border-radius:10px;
+}
+
+/* Contact */
+
+.contact{
+font-size:13px;
+color:#555;
+}
+
+/* Action Buttons */
+
+.action-btn{
+border:none;
+cursor:pointer;
+font-size:15px;
+margin-right:10px;
+transition:0.3s;
+}
+
+.edit{
+color:#2979ff;
+}
+
+.delete{
+color:#ff4d4d;
+}
+
+.action-btn:hover{
+transform:scale(1.2);
+}
+
+/* Modal */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:#fff;
+padding:25px;
+border-radius:10px;
+width:350px;
+}
+
+.modal-content h3{
+margin-bottom:15px;
+}
+
+.modal-content input{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.modal-content button{
+width:100%;
+background:#ff7a00;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+<div class="logo">RC Rudraksha</div>
+<ul class="menu">
+
+<li>
+<a href="index.html">
+<i class="fa-solid fa-chart-line"></i>
+<span>Dashboard</span>
+</a>
+</li>
+
+<li class="active">
+<a href="students.html">
+<i class="fa-solid fa-user-graduate"></i>
+<span>Students</span>
+</a>
+</li>
+
+<li>
+<a href="courses.html">
+<i class="fa-solid fa-book"></i>
+<span>Courses</span>
+</a>
+</li>
+
+<li>
+<a href="packages.html">
+<i class="fa-solid fa-box"></i>
+<span>Packages</span>
+</a>
+</li>
+
+<li>
+<a href="attendance.html">
+<i class="fa-solid fa-calendar-check"></i>
+<span>Attendance</span>
+</a>
+</li>
+
+<li>
+<a href="report.html">
+<i class="fa-solid fa-chart-pie"></i>
+<span>Reports</span>
+</a>
+</li>
+
+<li>
+<a href="setting.html">
+<i class="fa-solid fa-gear"></i>
+<span>Settings</span>
+</a>
+</li>
+
+</ul>
+
+<div class="admin-box">
+<strong>Admin User</strong><br>
+admin@rudraksha.com
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+
+<div>
+<h2>Students</h2>
+<p>Manage and view all student information</p>
+</div>
+
+<button class="add-btn" onclick="openModal()">+ Add Student</button>
+
+</div>
+
+<div class="search-bar">
+<input type="text" placeholder="Search students...">
+</div>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Contact</th>
+<th>Address</th>
+<th>Course</th>
+<th>Enrolled</th>
+<th>Expected End</th>
+<th>Total Fees</th>
+<th>Fees Paid</th>
+<th>Remaining</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody id="studentTable">
+
+<!-- Students will be loaded here -->
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal" id="studentModal">
+
+<div class="modal-content">
+
+<div style="display:flex; justify-content:space-between; align-items:center;">
+  <h3 id="modalTitle">Add Student</h3>
+  <i class="fa fa-times" onclick="closeModal()" style="cursor:pointer; font-size:20px;"></i>
+</div>
+
+<input type="text" id="name" placeholder="Student Name" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="text" id="phone" placeholder="Phone" required>
+<input type="text" id="address" placeholder="Address">
+<select id="course" multiple required>
+  <option value="">Select Course / Package</option>
+</select>
+<input type="number" id="totalFees" placeholder="Total Fees" readonly required>
+<input type="number" id="feesPaid" placeholder="Fees Paid" required>
+<input type="date" id="enrollmentDate">
+<input type="date" id="endDate">
+
+<button onclick="saveStudent()">Save Student</button>
+
+</div>
+
+</div>
+
+<script src="../api.js"></script>
+
+<script>
+
+// Check authentication
+if(!localStorage.getItem("token")){
+  window.location.href="login.html";
+}
+
+// Load students on page load
+document.addEventListener("DOMContentLoaded", () => {
+  loadCourses();
+  loadStudents();
+  document.getElementById('course').addEventListener('change', calculateTotalFees);
+});
+
+// Search functionality
+document.querySelector('.search-bar input').addEventListener('input', function(e) {
+  const searchTerm = e.target.value.toLowerCase();
+  const rows = document.querySelectorAll('#studentTable tr');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(searchTerm) ? '' : 'none';
+  });
+});
+
+async function loadCourses(){
+  const [coursesResult, packagesResult] = await Promise.all([API.courses.getAll(), API.packages.getAll()]);
+  console.log('Courses fetch result:', coursesResult);
+  console.log('Packages fetch result:', packagesResult);
+  if(coursesResult.success && packagesResult.success){
+    populateDropdown(coursesResult.courses || [], packagesResult.packages || []);
+  } else if (coursesResult.success) {
+    populateDropdown(coursesResult.courses || [], []);
+  } else if (packagesResult.success) {
+    populateDropdown([], packagesResult.packages || []);
+  }
+}
+
+function populateDropdown(courses, packages){
+  const courseSelect = document.getElementById("course");
+  courseSelect.innerHTML = '<option value="">Select Course / Package</option>';
+
+  courses.forEach(c => {
+    const option = document.createElement("option");
+    option.value = "course_" + c._id;
+    option.textContent = "Course: " + c.courseName;
+    option.dataset.fee = c.fees || c.price || 0;
+    courseSelect.appendChild(option);
+  });
+
+  packages.forEach(p => {
+    const option = document.createElement("option");
+    option.value = "package_" + p._id;
+    option.textContent = "Package: " + p.packageName;
+    option.dataset.fee = p.finalPrice || p.totalPrice || 0;
+    courseSelect.appendChild(option);
+  });
+}
+
+// Calculate total fees from multiple selected courses
+function calculateTotalFees() {
+  const courseSelect = document.getElementById("course");
+  const selectedOptions = Array.from(courseSelect.selectedOptions);
+  
+  console.log("SELECTED COURSES:", selectedOptions.map(opt => opt.text));
+  
+  let totalFees = 0;
+  selectedOptions.forEach(option => {
+    const fee = parseFloat(option.dataset.fee) || 0;
+    totalFees += fee;
+    console.log(`Course: ${option.text}, Fee: ${fee}, Running Total: ${totalFees}`);
+  });
+  
+  console.log("TOTAL FEES:", totalFees);
+  document.getElementById("totalFees").value = totalFees > 0 ? totalFees : "";
+}
+
+async function loadStudents(){
+  const result = await API.ownerStudents.getAll();
+  console.log('Students API result:', result);
+  if(result.success && result.students){
+    displayStudents(result.students);
+  }
+}
+
+async function payFees(studentId, studentName){
+  const amountInput = prompt(`Enter payment amount for ${studentName}:`);
+  if (amountInput === null) {
+    return; // User canceled
+  }
+
+  const amount = parseFloat(amountInput);
+  if (isNaN(amount) || amount <= 0) {
+    alert('Please enter a valid payment amount greater than zero.');
+    return;
+  }
+
+  const result = await API.ownerStudents.payFees(studentId, { amount });
+  if (result.success) {
+    alert('Payment recorded successfully');
+    loadStudents();
+  } else {
+    alert('Error: ' + result.message);
+  }
+}
+
+function displayStudents(students){
+  const tableBody = document.getElementById("studentTable");
+  tableBody.innerHTML="";
+  
+  students.forEach(student => {
+    const initials = student.name.split(" ").map(n=>n[0]).join("");
+    const enrollDate = new Date(student.enrollmentDate).toLocaleDateString();
+    const endDate = student.endDate ? new Date(student.endDate).toLocaleDateString() : "N/A";
+    
+    // Handle multiple courses - display all course names
+    let courseNames = "N/A";
+    if (student.courses && Array.isArray(student.courses) && student.courses.length > 0) {
+      // Display all courses with their fee info
+      courseNames = student.courses
+        .map(c => {
+          const name = c.courseName || c.name || "Course";
+          const fee = c.fees ? ` (₹${c.fees})` : "";
+          return name + fee;
+        })
+        .join(", ");
+      console.log("DISPLAYED COURSES:", courseNames);
+    } else if (student.package?.packageName) {
+      courseNames = student.package.packageName;
+    } else if (student.course?.courseName) {
+      courseNames = student.course.courseName;
+    }
+    
+    const row = `
+    <tr>
+      <td>
+        <div class="student">
+          <div class="avatar">${initials}</div>
+          ${student.name}
+        </div>
+      </td>
+      <td class="contact">${student.email}<br>${student.phone}</td>
+      <td>${student.address || "N/A"}</td>
+      <td>${courseNames}</td>
+      <td>${enrollDate}</td>
+      <td>${endDate}</td>
+      <td>₹${(student.totalFees || 0).toLocaleString()}</td>
+      <td>₹${(student.feesPaid || 0).toLocaleString()}</td>
+      <td>₹${((student.totalFees || 0) - (student.feesPaid || 0)).toLocaleString()}</td>
+      <td>
+        <i class="fa-solid fa-credit-card action-btn" title="Pay Fees" onclick="payFees('${student._id}', '${student.name.replace(/'/g, "\\'")}')"></i>
+        <i class="fa-solid fa-pen action-btn edit" onclick="editStudent('${student._id}')"></i>
+        <i class="fa-solid fa-trash action-btn delete" onclick="deleteStudent('${student._id}')"></i>
+      </td>
+    </tr>
+    `;
+    tableBody.innerHTML += row;
+  });
+}
+
+let editingStudentId = null;
+
+function openModal(studentId = null){
+  document.getElementById("studentModal").style.display="flex";
+  if(studentId){
+    editingStudentId = studentId;
+    document.getElementById("modalTitle").textContent = "Update Student";
+    loadStudentForEdit(studentId);
+  } else {
+    editingStudentId = null;
+    document.getElementById("modalTitle").textContent = "Add Student";
+    clearForm();
+  }
+}
+
+function editStudent(studentId){
+  openModal(studentId);
+}
+
+function closeModal(){
+  document.getElementById("studentModal").style.display="none";
+  document.getElementById("name").value="";
+  document.getElementById("email").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("address").value="";
+  document.getElementById("course").value="";
+  document.getElementById("totalFees").value="";
+  document.getElementById("feesPaid").value="";
+  document.getElementById("enrollmentDate").value="";
+  document.getElementById("endDate").value="";
+  editingStudentId = null;
+}
+
+function clearForm(){
+  document.getElementById("name").value="";
+  document.getElementById("email").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("address").value="";
+  document.getElementById("course").value="";
+  document.getElementById("totalFees").value="";
+  document.getElementById("feesPaid").value="";
+  document.getElementById("enrollmentDate").value="";
+  document.getElementById("endDate").value="";
+}
+
+async function loadStudentForEdit(studentId){
+  const result = await API.ownerStudents.get(studentId);
+  if(result.success && result.data){
+    const student = result.data;
+    document.getElementById("name").value = student.name;
+    document.getElementById("email").value = student.email;
+    document.getElementById("phone").value = student.phone;
+    document.getElementById("address").value = student.address || "";
+    
+    // Handle multiple courses
+    const courseSelect = document.getElementById("course");
+    courseSelect.value = ""; // Clear current selection
+    
+    if (student.courses && Array.isArray(student.courses) && student.courses.length > 0) {
+      // Multiple courses - select them
+      Array.from(courseSelect.options).forEach(option => {
+        const isSelected = student.courses.some(course => 
+          course.courseName === option.text || 
+          (course.courseId && option.value === `course_${course.courseId}`) ||
+          (course.packageId && option.value === `package_${course.packageId}`)
+        );
+        option.selected = isSelected;
+      });
+    } else {
+      // Single course (legacy support)
+      if(student.package){
+        courseSelect.value = "package_" + student.package._id;
+      } else if(student.course){
+        courseSelect.value = "course_" + student.course._id;
+      } else {
+        courseSelect.value = "";
+      }
+    }
+    
+    courseSelect.dispatchEvent(new Event('change')); // Trigger change to calculate total fees
+    document.getElementById("feesPaid").value = student.feesPaid || 0;
+    document.getElementById("enrollmentDate").value = student.enrollmentDate ? new Date(student.enrollmentDate).toISOString().split('T')[0] : "";
+    document.getElementById("endDate").value = student.endDate ? new Date(student.endDate).toISOString().split('T')[0] : "";
+  }
+}
+
+async function saveStudent(){
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const courseSelect = document.getElementById("course");
+  const totalFees = parseFloat(document.getElementById("totalFees").value);
+  const feesPaid = parseFloat(document.getElementById("feesPaid").value);
+  const enrollmentDate = document.getElementById("enrollmentDate").value;
+  const endDate = document.getElementById("endDate").value;
+
+  if(!name || !email || !phone || courseSelect.selectedOptions.length === 0 || isNaN(totalFees) || isNaN(feesPaid)){
+    alert("Please fill all required fields and select at least one course");
+    return;
+  }
+
+  if (totalFees < 0 || feesPaid < 0) {
+    alert("Fees values cannot be negative");
+    return;
+  }
+
+  if (feesPaid > totalFees) {
+    alert("Fees paid cannot exceed total fees");
+    return;
+  }
+
+  // Handle multiple course selection
+  const selectedOptions = Array.from(courseSelect.selectedOptions);
+  console.log("SELECTED COURSES:", selectedOptions.map(opt => opt.text));
+  console.log("TOTAL FEES:", totalFees);
+  
+  const selectedCourses = selectedOptions.map(option => {
+    const selectedValue = option.value;
+    let courseId = null;
+    let packageId = null;
+
+    if (selectedValue.startsWith('course_')) {
+      courseId = selectedValue.replace('course_', '');
+    } else if (selectedValue.startsWith('package_')) {
+      packageId = selectedValue.replace('package_', '');
+    }
+
+    return {
+      courseName: option.text,
+      courseId: courseId,
+      packageId: packageId,
+      feesPaid: feesPaid,
+      progress: 0,
+      duration: "Not Available",
+      expectedEndDate: endDate || null,
+      enrolledDate: enrollmentDate || new Date().toISOString()
+    };
+  });
+
+  console.log("COURSES ARRAY:", selectedCourses);
+
+  const studentData = {
+    name,
+    email,
+    phone,
+    address,
+    courses: selectedCourses, // Send as array
+    totalFees,
+    feesPaid,
+    enrollmentDate: enrollmentDate || new Date().toISOString(),
+    endDate: endDate || null,
+  };
+
+  console.log("STUDENT DATA TO SAVE:", studentData);
+
+  let result;
+  if(editingStudentId){
+    result = await API.ownerStudents.update(editingStudentId, studentData);
+  } else {
+    result = await API.ownerStudents.add(studentData);
+    console.log('Student creation result:', result);
+  }
+  
+  if(result.success){
+    alert(editingStudentId ? "Student updated successfully" : "Student added successfully");
+    closeModal();
+    loadStudents();
+  } else {
+    alert("Error: " + result.message);
+  }
+}
+
+async function deleteStudent(studentId){
+  if(confirm("Are you sure you want to delete this student?")){
+    const result = await API.ownerStudents.delete(studentId);
+    if(result.success){
+      alert("Student deleted successfully");
+      loadStudents();
+    } else {
+      alert("Error: " + result.message);
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>

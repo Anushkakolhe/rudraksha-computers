@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edit Course</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* Modern Gradient Background */
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#eef2ff,#e0e7ff,#f0f9ff);
+}
+
+/* Main Container */
+
+.main{
+width:450px;
+}
+
+/* Card */
+
+.form-card{
+background:white;
+padding:35px;
+border-radius:18px;
+box-shadow:0 15px 35px rgba(0,0,0,0.08);
+border:1px solid rgba(0,0,0,0.04);
+transition:0.3s;
+}
+
+.form-card:hover{
+transform:translateY(-6px);
+box-shadow:0 20px 40px rgba(0,0,0,0.12);
+}
+
+.form-card h2{
+margin-bottom:20px;
+color:#333;
+}
+
+/* Inputs */
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border-radius:10px;
+border:1px solid #ddd;
+background:#fafbff;
+transition:0.3s;
+}
+
+input:focus,textarea:focus{
+border-color:#2979ff;
+box-shadow:0 0 0 3px rgba(41,121,255,0.15);
+outline:none;
+}
+
+/* Button */
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:linear-gradient(45deg,#2979ff,#5ea3ff);
+color:white;
+font-size:16px;
+font-weight:500;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 10px 20px rgba(41,121,255,0.3);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="form-card">
+
+<h2><i class="fa-solid fa-pen-to-square"></i> Edit Course</h2>
+
+<form>
+
+<input type="text" value="Basic Computer Course">
+
+<textarea>Learn fundamental computer operations</textarea>
+
+<input type="text" value="Mr Verma">
+
+<input type="text" value="3 Months">
+
+<input type="number" value="5000">
+
+<textarea>
+Introduction to Computer
+MS Word
+MS Excel
+PowerPoint
+Internet
+</textarea>
+
+<button><i class="fa-solid fa-rotate"></i> Update Course</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>
