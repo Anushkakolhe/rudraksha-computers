@@ -1,7 +1,7 @@
 // API Utility - Centralized API calls with JWT authentication
 
-const API_BASE_URL = "http://localhost:5000/api";
-const AUTH_BASE_URL = "http://localhost:5000/auth";
+const API_BASE_URL = "https://rudraksha-computers.onrender.com/api";
+const AUTH_BASE_URL = "https://rudraksha-computers.onrender.com/auth";
 
 class API {
   static getToken() {
