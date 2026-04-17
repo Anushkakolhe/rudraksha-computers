@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const path = require("path");
 const Student = require("../../models/Student");
 const Course = require("../../models/Course");
 
@@ -367,7 +366,7 @@ const getStudentCourseById = async (req, res) => {
       ...buildContentItems(ownerCourse.modules),
       ...buildContentItems(ownerCourse.topics),
       ...buildContentItems(ownerCourse.description)
-    ].filter((item, index, self) => item && self.text && self.findIndex((other) => other.text === item.text) === index);
+    ].filter((item, index, self) => item && item.text && self.findIndex((other) => other.text === item.text) === index);
 
     const studentContent = [
       ...buildContentItems(enrolledCourse.content),
@@ -416,17 +415,6 @@ const getCourseById = async (req, res) => {
 
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
-    }
-
-    // Convert notesFile paths to public URLs
-    if (course.content && Array.isArray(course.content)) {
-      course.content = course.content.map(item => {
-        if (item.notesFile) {
-          item.notesFile = `http://localhost:5000/uploads/notes/${path.basename(item.notesFile)}`;
-          console.log("Serving file:", item.notesFile);
-        }
-        return item;
-      });
     }
 
     console.log("RETURNED COURSE:", course.courseName || course.name);
@@ -512,11 +500,11 @@ const getStudentCourseContent = async (req, res) => {
     }
 
     let contentArray = [
-      ...buildContentArray(ownerCourse.content),
-      ...buildContentArray(ownerCourse.modules),
-      ...buildContentArray(ownerCourse.topics),
-      ...buildContentArray(ownerCourse.description)
-    ].filter((item, index, self) => item && self.indexOf(item) === index);
+      ...buildContentItems(ownerCourse.content),
+      ...buildContentItems(ownerCourse.modules),
+      ...buildContentItems(ownerCourse.topics),
+      ...buildContentItems(ownerCourse.description)
+    ].filter((item, index, self) => item && item.text && self.findIndex((other) => other.text === item.text) === index);
 
     console.log("CONTENT FOUND:", contentArray);
     const progress = Math.min(typeof course.progress === "number" ? course.progress : (course.progress || 0), 100);

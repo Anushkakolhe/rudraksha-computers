@@ -403,13 +403,19 @@ const updateProgressState = () => {
 const downloadNotes = (url) => {
   console.log("Download URL:", url);
 
-  if (!url || url === "null") {
+  if (!url || url === "null" || url.trim() === "") {
     alert("No notes available");
     return;
   }
 
-  // IMPORTANT: do NOT prefix with "/"
-  window.open(url, "_blank");
+  // Fix legacy Cloudinary URLs: PDFs stored under /image/upload/ won't open correctly.
+  // Force /raw/upload/ for non-image files so the browser handles them properly.
+  const imageExts = /\.(jpg|jpeg|png|gif|webp)(\?|$)/i;
+  const fixedUrl = !imageExts.test(url)
+    ? url.replace("/image/upload/", "/raw/upload/")
+    : url;
+
+  window.open(fixedUrl, "_blank");
 };
 
 const markComplete = (contentId, isFallback = false) => {

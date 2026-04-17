@@ -104,13 +104,18 @@ exports.addNotesToContent = async (req, res) => {
     }
 
     if (!req.file || !req.file.path) {
-      return res.status(400).json({ message: 'Upload failed or file missing' });
+      return res.status(400).json({ message: 'No file uploaded or upload failed' });
     }
 
-    course.content[index].notesFile = req.file.path.replace(/\\/g, '/');
+    // req.file.path = Cloudinary secure_url set by multer-storage-cloudinary
+    const fileUrl = req.file.path;
+    console.log('[upload] req.file.path:', fileUrl);
+    console.log('[upload] req.file.filename (public_id):', req.file.filename);
+
+    course.content[index].notesFile = fileUrl;
     await course.save();
 
-    res.status(200).json({ message: 'Notes uploaded successfully' });
+    res.status(200).json({ message: 'Notes uploaded successfully', fileUrl });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

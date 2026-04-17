@@ -1,29 +1,34 @@
 const multer = require("multer");
-const path = require("path");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../uploads/notes"));
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: async (_req, file) => {
+    const isImage = ["image/jpeg", "image/png"].includes(file.mimetype);
+    return {
+      folder: "notes",
+      // "raw" ensures PDFs/DOCs are stored under /raw/upload/ with correct
+      // content-type headers. "image" for actual images.
+      resource_type: isImage ? "image" : "raw",
+    };
   },
-  filename: function (req, file, cb) {
-    const uniqueName = Date.now() + "-" + file.originalname;
-    cb(null, uniqueName);
-  }
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = [
+const fileFilter = (_req, file, cb) => {
+  const allowedMimes = [
     "application/pdf",
     "application/msword",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/vnd.ms-powerpoint",
-    "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "image/jpeg",
+    "image/png",
   ];
-
-  if (allowedTypes.includes(file.mimetype)) {
+  if (allowedMimes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Only PDF/DOC/PPTX allowed"), false);
+    cb(new Error("Only PDF, DOC, DOCX, PPT, PPTX, and images are allowed"), false);
   }
 };
 

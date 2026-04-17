@@ -18,7 +18,7 @@ router.post('/', addCourse);
 router.get('/', getAllCourses);
 router.get('/:id', getCourse);
 router.post('/:id/add-note', addNote);
-router.post('/add-notes/:courseId/:contentIndex', upload.single('notes'), addNotesToContent);
+router.post('/add-notes/:courseId/:contentIndex', upload.single('notesFile'), addNotesToContent);
 router.put('/:id', updateCourse);
 router.delete('/:id', deleteCourse);
 
