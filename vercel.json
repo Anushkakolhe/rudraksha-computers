@@ -1,6 +1,3 @@
 {
-  "outputDirectory": "client",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/pages/$1" }
-  ]
+  "outputDirectory": "client/pages"
 }

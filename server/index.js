@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 
 // CORS — allow Vercel frontend (all preview + production URLs) and local dev
-app.use(cors({
+const corsOptions = {
   origin: (origin, callback) => {
     // Allow requests with no origin (mobile apps, curl, Render health checks)
     if (!origin) return callback(null, true);
@@ -36,10 +36,9 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "Cache-Control"],
   credentials: true,
-}));
+};
 
-// Handle preflight for all routes
-app.options("*", cors());
+app.use(cors(corsOptions));
 
 
 // Serve static files from client directory
