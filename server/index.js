@@ -18,11 +18,28 @@ const studentAuthRoutes = require("./studentModule/routes/studentAuthRoutes");
 const app = express();
 
 app.use(express.json());
+
+// CORS — allow Vercel frontend (all preview + production URLs) and local dev
 app.use(cors({
-  origin: ["https://rudraksha-computers.vercel.app", "http://localhost:5500", "http://127.0.0.1:5500"],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Render health checks)
+    if (!origin) return callback(null, true);
+    const allowed = [
+      /^https:\/\/rudraksha-computers(\.vercel\.app|-.+\.vercel\.app)$/,
+      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
+    ];
+    if (allowed.some((pattern) => pattern.test(origin))) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked: ${origin}`));
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true
+  allowedHeaders: ["Content-Type", "Authorization", "Cache-Control"],
+  credentials: true,
 }));
+
+// Handle preflight for all routes
+app.options("*", cors());
 
 
 // Serve static files from client directory
@@ -33,10 +50,10 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("Server Running");
-});
+// Health check routes
+app.get("/", (req, res) => res.json({ status: "ok", message: "Server Running" }));
+app.get("/api", (req, res) => res.json({ status: "ok", message: "API Running" }));
+app.get("/api/test", (req, res) => res.json({ status: "ok", message: "API working", timestamp: new Date().toISOString() }));
 
 // Auth routes (no middleware required)
 app.use("/auth", authRoutes);

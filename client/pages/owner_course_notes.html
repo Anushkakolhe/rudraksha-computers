@@ -47,6 +47,7 @@ body{display:flex;background:#f4f6f9;}
 <div id="contentGrid"></div>
 </div>
 <script>
+const API_BASE = "https://rudraksha-computers.onrender.com";
 const token = localStorage.getItem('token');
 const courseId = localStorage.getItem('ownerCourseId');
 if (!token) {
@@ -59,7 +60,7 @@ async function loadCourse() {
   const grid = document.getElementById('contentGrid');
   grid.innerHTML = '<p class="empty">Loading course details...</p>';
   try {
-    const res = await fetch(`/api/courses/${courseId}`, {
+    const res = await fetch(`${API_BASE}/api/courses/${courseId}`, {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();
@@ -134,7 +135,7 @@ async function uploadNotes(index) {
   const formData = new FormData();
   formData.append('notesFile', file);
   try {
-    const res = await fetch(`/api/courses/add-notes/${courseId}/${index}`, {
+    const res = await fetch(`${API_BASE}/api/courses/add-notes/${courseId}/${index}`, {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + token
@@ -160,7 +161,7 @@ async function addNote(index) {
     return;
   }
   try {
-    const res = await fetch(`/api/courses/${courseId}/add-note`, {
+    const res = await fetch(`${API_BASE}/api/courses/${courseId}/add-note`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

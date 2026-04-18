@@ -45,6 +45,7 @@ body{display:flex;background:#f4f6f9;}
 <div class="grid" id="courseGrid"></div>
 </div>
 <script>
+const API_BASE = "https://rudraksha-computers.onrender.com";
 const token = localStorage.getItem('token');
 if (!token) {
   window.location.href = 'login.html';
@@ -53,7 +54,7 @@ async function loadCourses() {
   const grid = document.getElementById('courseGrid');
   grid.innerHTML = '<p>Loading courses...</p>';
   try {
-    const res = await fetch('/api/courses', {
+    const res = await fetch(`${API_BASE}/api/courses`, {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();
