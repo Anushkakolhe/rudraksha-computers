@@ -18,14 +18,18 @@ const studentAuthRoutes = require("./studentModule/routes/studentAuthRoutes");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ["https://rudraksha-computers.vercel.app", "http://localhost:5500", "http://127.0.0.1:5500"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
 
 
 // Serve static files from client directory
 app.use(express.static(path.join(__dirname, "../client")));
 
 // MongoDB connection (using Atlas from .env or local)
-mongoose.connect(process.env.MONGO_URI || "mongodb+srv://Admin:Admin%40123@cluster0.zm5kreg.mongodb.net/studentDB?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
@@ -52,6 +56,7 @@ app.use("/api/owner/dashboard", dashboardRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/settings", settingsRoutes);
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

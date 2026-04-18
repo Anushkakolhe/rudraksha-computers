@@ -558,7 +558,7 @@ async function loadCourse() {
   }
 
   try {
-    const apiUrl = `http://localhost:5000/api/student/course/id/${encodeURIComponent(courseId)}`;
+    const apiUrl = `https://rudraksha-computers.onrender.com/api/student/course/id/${encodeURIComponent(courseId)}`;
     console.log("[loadCourse] Fetching from:", apiUrl);
     console.log("[loadCourse] Full URL including params:", window.location.href);
     

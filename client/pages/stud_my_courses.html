@@ -204,7 +204,7 @@ async function loadCourses() {
       return;
     }
 
-    const res = await fetch('http://localhost:5000/api/student/dashboard', {
+    const res = await fetch('https://rudraksha-computers.onrender.com/api/student/dashboard', {
       headers: {
         'Authorization': 'Bearer ' + token
       }
