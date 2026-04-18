@@ -384,12 +384,18 @@ async function loadDashboard(){
 
 async function loadStats(){
   const result = await API.dashboard.stats();
+  console.log("Dashboard stats response:", result);
   if(result.success && result.data){
     const stats = result.data;
     document.getElementById("totalStudents").innerText = stats.totalStudents;
     document.getElementById("totalCourses").innerText = stats.totalCourses;
     document.getElementById("revenue").innerText = stats.totalRevenue.toLocaleString();
     document.getElementById("completionRate").innerText = "N/A";
+  } else {
+    console.error("Stats fetch failed:", result.message);
+    document.getElementById("totalStudents").innerText = "—";
+    document.getElementById("totalCourses").innerText = "—";
+    document.getElementById("revenue").innerText = "—";
   }
 }
 
@@ -456,21 +462,25 @@ async function loadRecentActivities(){
     const activities = result.data;
     const list = document.getElementById("activitiesList");
     list.innerHTML = "";
-    
-    if(activities.students && activities.students.length > 0){
-      activities.students.forEach(student => {
+
+    // controller returns newStudents and recentAttendance
+    if(activities.newStudents && activities.newStudents.length > 0){
+      activities.newStudents.forEach(student => {
         const time = new Date(student.createdAt).toLocaleString();
-        const li = `<li>${student.name} - Enrolled in a course (${time})</li>`;
-        list.innerHTML += li;
+        list.innerHTML += `<li>${student.name} - New student enrolled (${time})</li>`;
       });
     }
-    
-    if(activities.transactions && activities.transactions.length > 0){
-      activities.transactions.forEach(transaction => {
-        const time = new Date(transaction.createdAt).toLocaleString();
-        const li = `<li>Transaction - ${transaction.description} (${time})</li>`;
-        list.innerHTML += li;
+
+    if(activities.recentAttendance && activities.recentAttendance.length > 0){
+      activities.recentAttendance.forEach(record => {
+        const time = new Date(record.createdAt).toLocaleString();
+        const name = record.studentId?.name || "Unknown";
+        list.innerHTML += `<li>${name} - Attendance marked (${time})</li>`;
       });
+    }
+
+    if(list.innerHTML === ""){
+      list.innerHTML = "<li style='color:#999'>No recent activity found</li>";
     }
   }
 }

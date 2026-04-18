@@ -97,7 +97,7 @@ router.post("/login", async (req, res) => {
     // Generate JWT token with 7-day expiration
     const token = jwt.sign(
       { id: owner._id, email: owner.email },
-      "your_super_secret_jwt_key_change_this_in_production_12345",
+      process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
