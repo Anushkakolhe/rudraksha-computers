@@ -16,11 +16,11 @@ router.use(authMiddleware);
 
 router.post('/', addStudent);
 router.get('/', getAllStudents);
+router.delete('/reset', resetStudents);
 router.post('/pay-fees/:id', payFees);
 router.get('/:id/payments', getPaymentHistory);
 router.get('/:id', getStudent);
 router.put('/:id', updateStudent);
 router.delete('/:id', deleteStudent);
-router.delete('/reset', resetStudents);
 
 module.exports = router;

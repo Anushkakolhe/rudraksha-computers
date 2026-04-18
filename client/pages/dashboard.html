@@ -375,11 +375,14 @@ const openDailyTask = () => {
 };
 
 async function loadDashboard(){
-  await loadStats();
-  await loadEnrollmentTrend();
-  await loadCoursePopularity();
-  await loadRecentActivities();
-  await loadTodayClasses();
+  // Run all fetches in parallel — one failure won't block the others
+  await Promise.allSettled([
+    loadStats(),
+    loadEnrollmentTrend(),
+    loadCoursePopularity(),
+    loadRecentActivities(),
+    loadTodayClasses()
+  ]);
 }
 
 async function loadStats(){
@@ -474,7 +477,7 @@ async function loadRecentActivities(){
     if(activities.recentAttendance && activities.recentAttendance.length > 0){
       activities.recentAttendance.forEach(record => {
         const time = new Date(record.createdAt).toLocaleString();
-        const name = record.studentId?.name || "Unknown";
+        const name = record.student?.name || "Unknown";
         list.innerHTML += `<li>${name} - Attendance marked (${time})</li>`;
       });
     }
@@ -487,28 +490,29 @@ async function loadRecentActivities(){
 
 async function loadTodayClasses(){
   const result = await API.dashboard.classes();
+  console.log("Today classes response:", result);
   if(result.success && result.data){
     const classes = result.data;
     const container = document.getElementById("classesContainer");
     container.innerHTML = "";
-    
+
     if(classes.length === 0){
-      container.innerHTML = "<p style='text-align:center; padding:20px;'>No classes scheduled for today</p>";
+      container.innerHTML = "<p style='text-align:center; padding:20px; color:#999'>No attendance marked today</p>";
       return;
     }
-    
+
     classes.forEach(cls => {
       const time = new Date(cls.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      const classDiv = `
+      const studentName = cls.student?.name || "Unknown";
+      const status = cls.status || "";
+      container.innerHTML += `
       <div class="class-item">
         <div>
-          <strong>${cls.course.title}</strong><br>
-          Student: ${cls.studentId.name}
+          <strong>${studentName}</strong><br>
+          <small>Status: ${status}</small>
         </div>
         <div class="time">${time}</div>
-      </div>
-      `;
-      container.innerHTML += classDiv;
+      </div>`;
     });
   }
 }

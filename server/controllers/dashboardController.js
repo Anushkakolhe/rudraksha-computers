@@ -108,7 +108,7 @@ exports.getCoursePopularity = async (req, res) => {
 exports.getActivities = async (req, res) => {
   try {
     const recentStudents = await Student.find().sort({ createdAt: -1 }).limit(5).select('name email createdAt');
-    const recentAttendance = await Attendance.find().sort({ createdAt: -1 }).limit(5).populate('studentId', 'name');
+    const recentAttendance = await Attendance.find().sort({ createdAt: -1 }).limit(5).populate('student', 'name');
 
     res.status(200).json({
       success: true,
@@ -132,7 +132,7 @@ exports.getClasses = async (req, res) => {
 
     const todayAttendance = await Attendance.find({
       date: { $gte: today, $lt: tomorrow }
-    }).populate('studentId', 'name course');
+    }).populate('student', 'name');
 
     console.log('Today classes records found', todayAttendance.length);
 
