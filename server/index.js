@@ -19,13 +19,17 @@ const app = express();
 
 app.use(express.json());
 
-// CORS — allow Vercel frontend (all preview + production URLs) and local dev
+// CORS — allow custom domain, Vercel (all preview + production), and local dev
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, curl, Render health checks)
+    // Allow requests with no origin (curl, Render health checks, mobile apps)
     if (!origin) return callback(null, true);
     const allowed = [
+      // Custom domain (www + apex)
+      /^https:\/\/(www\.)?rudrakshacomputers\.online$/,
+      // Vercel production + all preview deploys
       /^https:\/\/rudraksha-computers(\.vercel\.app|-.+\.vercel\.app)$/,
+      // Local dev
       /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
     ];
     if (allowed.some((pattern) => pattern.test(origin))) {
