@@ -1,357 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Owner Login</title>
-
+<title>Owner Login – Rudraksha</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#2563eb,#3b82f6,#60a5fa);
-}
-
-/* Container */
-
-.container{
-width:850px;
-background:white;
-border-radius:12px;
-box-shadow:0 20px 40px rgba(0,0,0,0.2);
-display:flex;
-overflow:hidden;
-}
-
-/* Left Section */
-
-.left{
-width:50%;
-background:linear-gradient(135deg,#2563eb,#1e40af);
-color:white;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:40px;
-text-align:center;
-}
-
-.left h2{
-margin-bottom:15px;
-}
-
-.left p{
-font-size:14px;
-opacity:.9;
-}
-
-/* Right Section */
-
-.right{
-width:50%;
-padding:40px;
-}
-
-.form{
-display:flex;
-flex-direction:column;
-}
-
-.form h2{
-text-align:center;
-margin-bottom:20px;
-color:#2563eb;
-}
-
-.input-box{
-position:relative;
-margin-bottom:18px;
-}
-
-.input-box input{
-width:100%;
-padding:12px 40px;
-border:1px solid #ddd;
-border-radius:6px;
-outline:none;
-}
-
-.input-box i{
-position:absolute;
-left:12px;
-top:13px;
-color:#2563eb;
-}
-
-/* Button */
-
-button{
-padding:12px;
-border:none;
-background:#2563eb;
-color:white;
-border-radius:6px;
-cursor:pointer;
-transition:.3s;
-}
-
-button:hover{
-background:#1d4ed8;
-}
-
-/* Toggle */
-
-.toggle{
-text-align:center;
-margin-top:15px;
-font-size:14px;
-}
-
-.toggle span{
-color:#2563eb;
-cursor:pointer;
-font-weight:500;
-}
-
-/* Hide signup */
-
-#signup{
-display:none;
-}
-
-</style>
-
+<link rel="stylesheet" href="../shared.css">
 </head>
-
 <body>
-
-<div class="container">
-
-<!-- Left Info -->
-
-<div class="left">
-
-<h2>Owner Dashboard</h2>
-
-<p>
-Login to manage students, courses, attendance, reports and institute data.
-</p>
-
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-left">
+      <h2>Owner Dashboard</h2>
+      <p>Login to manage students, courses, attendance, reports and institute data.</p>
+    </div>
+    <div class="login-right">
+      <div id="login" class="login-form">
+        <h2>Owner Login</h2>
+        <div class="input-box"><i class="fa fa-envelope"></i><input type="email" id="email" placeholder="Owner Email" required></div>
+        <div class="input-box"><i class="fa fa-lock"></i><input type="password" id="password" placeholder="Password" minlength="8" maxlength="16" required></div>
+        <button class="login-btn" onclick="handleLogin(event)">Login</button>
+        <div class="toggle-link">Don't have an account? <span onclick="showSignup()">Sign Up</span></div>
+      </div>
+      <div id="signup" class="login-form" style="display:none;">
+        <h2>Create Account</h2>
+        <div class="input-box"><i class="fa fa-user"></i><input type="text" id="name" placeholder="Full Name" required></div>
+        <div class="input-box"><i class="fa fa-envelope"></i><input type="email" id="signup-email" placeholder="Owner Email" required></div>
+        <div class="input-box"><i class="fa fa-lock"></i><input type="password" id="signup-password" placeholder="Password" minlength="8" maxlength="16" required></div>
+        <button class="login-btn" onclick="handleSignup(event)">Create Account</button>
+        <div class="toggle-link">Already have an account? <span onclick="showLogin()">Login</span></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Right Form -->
-
-<div class="right">
-
-<!-- LOGIN -->
-
-<div id="login" class="form">
-
-<h2>Owner Login</h2>
-
-<div class="input-box">
-<i class="fa fa-envelope"></i>
-<input 
-  type="email" 
-  id="email" 
-  placeholder="Owner Email" 
-  required>
-</div>
-
-<div class="input-box">
-<i class="fa fa-lock"></i>
-<input 
-  type="password" 
-  id="password" 
-  placeholder="Password" 
-  minlength="8" 
-  maxlength="16" 
-  required>
-</div>
-
-<button onclick="handleLogin(event)">Login</button>
-
-<div class="toggle">
-Don't have an account?
-<span onclick="showSignup()">Sign Up</span>
-</div>
-
-</div>
-
-<!-- SIGNUP -->
-
-<div id="signup" class="form">
-
-<h2>Create Owner Account</h2>
-
-<div class="input-box">
-<i class="fa fa-user"></i>
-<input 
-  type="text" 
-  id="name" 
-  placeholder="Full Name" 
-  required>
-</div>
-
-<div class="input-box">
-<i class="fa fa-envelope"></i>
-<input 
-  type="email" 
-  id="signup-email" 
-  placeholder="Owner Email" 
-  required>
-</div>
-
-<div class="input-box">
-<i class="fa fa-lock"></i>
-<input 
-  type="password" 
-  id="signup-password" 
-  placeholder="Password" 
-  minlength="8" 
-  maxlength="16" 
-  required>
-</div>
-
-<button onclick="handleSignup(event)">Create Account</button>
-
-<div class="toggle">
-Already have an account?
-<span onclick="showLogin()">Login</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+<script src="../shared.js"></script>
 <script>
-
-// API Base URL
 const API_URL = "https://rudraksha-computers.onrender.com/auth";
 
-// Toggle between login and signup forms
-function showSignup() {
-  document.getElementById("login").style.display = "none";
-  document.getElementById("signup").style.display = "flex";
-}
+function showSignup() { document.getElementById("login").style.display="none"; document.getElementById("signup").style.display="flex"; }
+function showLogin()  { document.getElementById("signup").style.display="none"; document.getElementById("login").style.display="flex"; }
 
-function showLogin() {
-  document.getElementById("signup").style.display = "none";
-  document.getElementById("login").style.display = "flex";
-}
-
-// Handle Login - Fetch to /auth/login endpoint
-async function handleLogin(event) {
-  event.preventDefault();
-
+async function handleLogin(e) {
+  e.preventDefault();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
-
-  // Validation
-  if (!email || !password) {
-    alert("Please fill in all fields");
-    return;
-  }
-
-  if (password.length < 8 || password.length > 16) {
-    alert("Password must be between 8 and 16 characters");
-    return;
-  }
-
+  if (!email || !password) { showToast("Please fill in all fields", "error"); return; }
   try {
-    const response = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
+    const res = await fetch(`${API_URL}/login`, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email,password}) });
+    const data = await res.json();
     if (data.success) {
-      // Store token in localStorage
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-
-      alert("Login successful!");
-      // Redirect to owner dashboard
       window.location.href = "dashboard.html";
-    } else {
-      alert("Login failed: " + data.message);
-    }
-  } catch (error) {
-    console.error("Login error:", error);
-    alert("An error occurred. Please try again.");
-  }
+    } else { showToast(data.message, "error"); }
+  } catch { showToast("An error occurred. Please try again.", "error"); }
 }
 
-// Handle Signup - Fetch to /auth/signup endpoint
-async function handleSignup(event) {
-  event.preventDefault();
-
+async function handleSignup(e) {
+  e.preventDefault();
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("signup-email").value.trim();
   const password = document.getElementById("signup-password").value;
-
-  // Validation
-  if (!name || !email || !password) {
-    alert("Please fill in all fields");
-    return;
-  }
-
-  if (password.length < 8 || password.length > 16) {
-    alert("Password must be between 8 and 16 characters");
-    return;
-  }
-
+  if (!name || !email || !password) { showToast("Please fill in all fields", "error"); return; }
   try {
-    const response = await fetch(`${API_URL}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password }),
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      alert("Account created successfully! Please login.");
-      // Clear form and switch to login
-      document.getElementById("name").value = "";
-      document.getElementById("signup-email").value = "";
-      document.getElementById("signup-password").value = "";
-      showLogin();
-    } else {
-      alert("Signup failed: " + data.message);
-    }
-  } catch (error) {
-    console.error("Signup error:", error);
-    alert("An error occurred. Please try again.");
-  }
+    const res = await fetch(`${API_URL}/signup`, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({name,email,password}) });
+    const data = await res.json();
+    if (data.success) { showToast("Account created! Please login."); showLogin(); }
+    else { showToast(data.message, "error"); }
+  } catch { showToast("An error occurred. Please try again.", "error"); }
 }
-
 </script>
-
 </body>
 </html>

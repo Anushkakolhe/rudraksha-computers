@@ -1,296 +1,76 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Settings - Rudraksha</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings – Rudraksha</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<link rel="stylesheet" href="../shared.css">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-/* Background */
-
-body{
-display:flex;
-background:linear-gradient(135deg,#eef2ff,#e0e7ff,#f6f8ff);
-min-height:100vh;
-}
-
-/* Sidebar */
-
-.sidebar{
-width:230px;
-background:white;
-height:100vh;
-padding:25px;
-box-shadow:2px 0 15px rgba(0,0,0,.08);
-}
-
-.logo{
-font-weight:600;
-font-size:18px;
-margin-bottom:30px;
-color:#ff7a00;
-}
-
-.menu a{
-display:flex;
-align-items:center;
-gap:10px;
-padding:12px;
-margin-bottom:8px;
-text-decoration:none;
-color:#333;
-border-radius:8px;
-transition:.3s;
-}
-
-.menu a:hover{
-background:#fff3e6;
-color:#ff7a00;
-transform:translateX(5px);
-}
-
-.menu a.active{
-background:linear-gradient(90deg,#ff7a00,#ff9a3c);
-color:white;
-}
-
-/* Main */
-
-.main{
-flex:1;
-padding:35px;
-}
-
-.main h1{
-margin-bottom:5px;
-}
-
-.main p{
-color:#666;
-margin-bottom:25px;
-}
-
-/* Cards */
-
-.card{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-margin-bottom:25px;
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-4px);
-}
-
-.card h3{
-margin-bottom:20px;
-}
-
-/* Form */
-
-label{
-display:block;
-margin-bottom:6px;
-margin-top:10px;
-font-size:14px;
-font-weight:500;
-}
-
-input,textarea{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid #ddd;
-background:#fafbff;
-transition:.3s;
-}
-
-input:focus,textarea:focus{
-border-color:#ff7a00;
-outline:none;
-box-shadow:0 0 0 3px rgba(255,122,0,.15);
-}
-
-/* Button */
-
-button{
-margin-top:15px;
-background:linear-gradient(45deg,#ff7a00,#ff9d40);
-color:white;
-border:none;
-padding:12px 20px;
-border-radius:10px;
-cursor:pointer;
-font-weight:500;
-transition:.3s;
-}
-
-button:hover{
-transform:scale(1.05);
-box-shadow:0 10px 20px rgba(255,122,0,.3);
-}
-
-/* Notification Toggle */
-
-.setting-item{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 0;
-border-bottom:1px solid #eee;
-}
-
-/* Toggle Switch */
-
-.switch{
-position:relative;
-display:inline-block;
-width:45px;
-height:22px;
-}
-
-.switch input{
-opacity:0;
-width:0;
-height:0;
-}
-
-.slider{
-position:absolute;
-cursor:pointer;
-top:0;
-left:0;
-right:0;
-bottom:0;
-background:#ccc;
-transition:.4s;
-border-radius:30px;
-}
-
-.slider:before{
-position:absolute;
-content:"";
-height:16px;
-width:16px;
-left:3px;
-bottom:3px;
-background:white;
-transition:.4s;
-border-radius:50%;
-}
-
-input:checked + .slider{
-background:#ff7a00;
-}
-
-input:checked + .slider:before{
-transform:translateX(22px);
-}
-
+.setting-item { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); font-size:14px; }
+.switch { position:relative; display:inline-block; width:44px; height:22px; }
+.switch input { opacity:0; width:0; height:0; }
+.slider { position:absolute; cursor:pointer; inset:0; background:#ccc; transition:.3s; border-radius:30px; }
+.slider:before { position:absolute; content:""; height:16px; width:16px; left:3px; bottom:3px; background:#fff; transition:.3s; border-radius:50%; }
+input:checked + .slider { background:var(--primary); }
+input:checked + .slider:before { transform:translateX(22px); }
 </style>
-
 </head>
-
 <body>
 
-<!-- Sidebar -->
+<nav class="topnav">
+  <span class="logo-text">RC Rudraksha</span>
+  <div class="topnav-right">
+    <button class="dark-toggle">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-<div class="sidebar">
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="logo">RC Rudraksha</div>
+    <div class="menu">
+      <a href="dashboard.html"><i class="fa fa-chart-line"></i>Dashboard</a>
+      <a href="students.html"><i class="fa fa-user-graduate"></i>Students</a>
+      <a href="courses.html"><i class="fa fa-book"></i>Courses</a>
+      <a href="packages.html"><i class="fa fa-box"></i>Packages</a>
+      <a href="attendance.html"><i class="fa fa-calendar-check"></i>Attendance</a>
+      <a href="report.html"><i class="fa-solid fa-chart-pie"></i>Reports</a>
+      <a href="setting.html" class="active"><i class="fa fa-gear"></i>Settings</a>
+    </div>
+    <div class="admin-box"><strong>Admin User</strong><br>admin@rudraksha.com</div>
+  </aside>
 
-<div class="logo">RC Rudraksha</div>
+  <main class="main">
+    <div class="page-header">
+      <div><h2>Settings</h2><p>Manage your institute settings and preferences</p></div>
+      <button class="dark-toggle">🌙</button>
+    </div>
 
-<div class="menu">
-<a href="dashboard.html"><i class="fa fa-chart-line"></i> Dashboard</a>
-<a href="students.html"><i class="fa fa-user-graduate"></i> Students</a>
-<a href="courses.html"><i class="fa fa-book"></i> Courses</a>
-<a href="packages.html"><i class="fa fa-box"></i> Packages</a>
-<a href="attendance.html"><i class="fa fa-calendar-check"></i> Attendance</a>
-<a href="report.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
-<a href="setting.html" class="active"><i class="fa fa-gear"></i> Settings</a>
+    <div class="card">
+      <h3><i class="fa fa-building" style="margin-right:8px;color:var(--primary)"></i>Institute Information</h3>
+      <div class="form-group"><label>Institute Name</label><input type="text" id="instituteName" placeholder="Enter institute name"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="instituteEmail" placeholder="Enter email"></div>
+      <div class="form-group"><label>Phone</label><input type="tel" id="institutePhone" placeholder="Enter phone number"></div>
+      <div class="form-group"><label>Address</label><textarea id="instituteAddress" rows="3" placeholder="Enter address" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px;outline:none;resize:vertical;"></textarea></div>
+      <button class="btn btn-primary" onclick="saveSettings()"><i class="fa fa-save"></i> Save Changes</button>
+    </div>
+
+    <div class="card">
+      <h3><i class="fa fa-bell" style="margin-right:8px;color:var(--primary)"></i>Notifications</h3>
+      <div class="setting-item"><span>Email Notifications</span><label class="switch"><input type="checkbox" id="emailNotifications"><span class="slider"></span></label></div>
+      <div class="setting-item"><span>SMS Alerts</span><label class="switch"><input type="checkbox" id="smsAlerts"><span class="slider"></span></label></div>
+      <div class="setting-item"><span>Attendance Alerts</span><label class="switch"><input type="checkbox" id="attendanceAlerts"><span class="slider"></span></label></div>
+    </div>
+  </main>
 </div>
 
-</div>
-
-<!-- Main -->
-
-<div class="main">
-
-<h1>Settings</h1>
-<p>Manage your institute settings and preferences</p>
-
-<!-- Institute Info -->
-
-<div class="card">
-
-<h3><i class="fa fa-building"></i> Institute Information</h3>
-
-<label>Institute Name</label>
-<input type="text" id="instituteName" placeholder="Enter institute name">
-
-<label>Email</label>
-<input type="email" id="instituteEmail" placeholder="Enter email">
-
-<label>Phone</label>
-<input type="text" id="institutePhone" placeholder="Enter phone number">
-
-<label>Address</label>
-<textarea id="instituteAddress" rows="3" placeholder="Enter institute address"></textarea>
-
-<button onclick="saveSettings()"><i class="fa fa-save"></i> Save Changes</button>
-
-</div>
-
-<!-- Notifications -->
-
-<div class="card">
-
-<h3><i class="fa fa-bell"></i> Notifications</h3>
-
-<div class="setting-item">
-<span>Email Notifications</span>
-<label class="switch">
-<input type="checkbox" id="emailNotifications">
-<span class="slider"></span>
-</label>
-</div>
-
-<div class="setting-item">
-<span>SMS Alerts</span>
-<label class="switch">
-<input type="checkbox" id="smsAlerts">
-<span class="slider"></span>
-</label>
-</div>
-
-<div class="setting-item">
-<span>Attendance Alerts</span>
-<label class="switch">
-<input type="checkbox" id="attendanceAlerts">
-<span class="slider"></span>
-</label>
-</div>
-
-</div>
-
-</div>
-
-</body>
-
-<script src="./api.js"></script>
+<script src="/api.js"></script>
+<script src="../shared.js"></script>
 
 <script>
 

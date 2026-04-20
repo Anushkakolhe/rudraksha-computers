@@ -1,367 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-<title>Reports - Rudraksha</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports – Rudraksha</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<link rel="stylesheet" href="../shared.css">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-display:flex;
-background:linear-gradient(135deg,#eef2ff,#e0e7ff,#f6f8ff);
-min-height:100vh;
-}
-
-/* Sidebar */
-
-.sidebar{
-width:230px;
-background:white;
-height:100vh;
-padding:25px;
-box-shadow:2px 0 15px rgba(0,0,0,.08);
-}
-
-.logo{
-font-weight:600;
-font-size:18px;
-margin-bottom:30px;
-color:#ff7a00;
-}
-
-.menu a{
-display:flex;
-align-items:center;
-gap:10px;
-padding:12px;
-margin-bottom:8px;
-text-decoration:none;
-color:#333;
-border-radius:8px;
-transition:.3s;
-}
-
-.menu a:hover{
-background:#fff3e6;
-color:#ff7a00;
-transform:translateX(5px);
-}
-
-.menu a.active{
-background:linear-gradient(90deg,#ff7a00,#ff9a3c);
-color:white;
-}
-
-/* Main */
-
-.main{
-flex:1;
-padding:35px;
-}
-
-.main h1{
-margin-bottom:5px;
-}
-
-.main p{
-color:#666;
-margin-bottom:25px;
-}
-
-/* Report Controls */
-
-.controls{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-flex-wrap:wrap;
-gap:10px;
-}
-
-.controls select{
-padding:8px;
-border-radius:6px;
-border:1px solid #ddd;
-}
-
-.btn{
-padding:10px 14px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-color:white;
-}
-
-.download{
-background:#ff7a00;
-}
-
-.refresh{
-background:#4CAF50;
-}
-
-.print{
-background:#2979ff;
-}
-
-/* Cards */
-
-.stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-margin-bottom:30px;
-}
-
-.stat-card{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-transition:.3s;
-}
-
-.stat-card:hover{
-transform:translateY(-5px);
-}
-
-.stat-card h4{
-color:#777;
-font-size:14px;
-margin-bottom:6px;
-}
-
-.stat-card h2{
-font-size:26px;
-}
-
-.icon{
-font-size:22px;
-color:#ff7a00;
-margin-bottom:10px;
-}
-
-/* Chart */
-
-.card{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-margin-bottom:25px;
-}
-
-/* Table */
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th{
-background:#f7f9fc;
-padding:12px;
-text-align:left;
-}
-
-td{
-padding:12px;
-border-bottom:1px solid #eee;
-}
-
-tr:hover{
-background:#f9fbff;
-}
-
-.income{
-color:green;
-font-weight:500;
-}
-
-.expense{
-color:red;
-font-weight:500;
-}
-
+.controls { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:22px; }
+.controls select { padding:9px 12px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); color:var(--text); font-size:14px; }
+.income  { color:var(--green); font-weight:500; }
+.expense { color:var(--red);   font-weight:500; }
 </style>
-
 </head>
-
 <body>
 
-<div class="sidebar">
+<nav class="topnav">
+  <span class="logo-text">RC Rudraksha</span>
+  <div class="topnav-right">
+    <button class="dark-toggle">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-<div class="logo">RC Rudraksha</div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="logo">RC Rudraksha</div>
+    <div class="menu">
+      <a href="dashboard.html"><i class="fa fa-chart-line"></i>Dashboard</a>
+      <a href="students.html"><i class="fa fa-user-graduate"></i>Students</a>
+      <a href="courses.html"><i class="fa fa-book"></i>Courses</a>
+      <a href="packages.html"><i class="fa fa-box"></i>Packages</a>
+      <a href="attendance.html"><i class="fa fa-calendar-check"></i>Attendance</a>
+      <a href="report.html" class="active"><i class="fa fa-chart-pie"></i>Reports</a>
+      <a href="setting.html"><i class="fa fa-gear"></i>Settings</a>
+    </div>
+    <div class="admin-box"><strong>Admin User</strong><br>admin@rudraksha.com</div>
+  </aside>
 
-<div class="menu">
-<a href="dashboard.html"><i class="fa fa-chart-line"></i> Dashboard</a>
-<a href="students.html"><i class="fa fa-user-graduate"></i> Students</a>
-<a href="courses.html"><i class="fa fa-book"></i> Courses</a>
-<a href="packages.html"><i class="fa fa-box"></i> Packages</a>
-<a href="attendance.html"><i class="fa fa-calendar-check"></i> Attendance</a>
-<a href="report.html" class="active"><i class="fa fa-chart-pie"></i> Reports</a>
-<a href="setting.html"><i class="fa fa-gear"></i> Settings</a>
+  <main class="main">
+    <div class="page-header">
+      <div><h2>Financial Reports</h2><p>Track income, expenses and overall earnings</p></div>
+      <button class="dark-toggle">🌙</button>
+    </div>
+
+    <div class="controls">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <label style="font-size:14px;font-weight:500;">Report:</label>
+        <select id="reportType" onchange="onReportTypeChange()">
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+        <select id="reportYear" onchange="changeReport()"></select>
+        <select id="reportMonth" onchange="changeReport()">
+          <option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option>
+          <option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option>
+          <option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option>
+          <option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-green btn-sm" onclick="loadAllReportData()"><i class="fa fa-refresh"></i> Refresh</button>
+        <button class="btn btn-primary btn-sm" onclick="downloadCSV()"><i class="fa fa-download"></i> CSV</button>
+        <button class="btn btn-blue btn-sm" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Add Expense</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end;">
+        <div class="form-group" style="margin:0;"><label>Amount</label><input type="number" id="transactionAmount" placeholder="0" min="0"></div>
+        <div class="form-group" style="margin:0;"><label>Category</label>
+          <select id="transactionCategory" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);">
+            <option value="rent">Rent</option><option value="electricity">Electricity</option>
+            <option value="maintenance">Maintenance</option><option value="marketing">Marketing</option>
+            <option value="salary">Salary</option><option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin:0;"><label>Description</label><input type="text" id="transactionDescription" placeholder="Description"></div>
+        <button class="btn btn-primary" onclick="addExpense()">Add Expense</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Category-wise Expenses</h3>
+      <div id="categoryBreakdown" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;"></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon" style="color:var(--primary)"><i class="fa fa-money-bill"></i></div><div class="stat-label">Total Revenue</div><div class="stat-value" id="totalRevenue">₹0</div></div>
+      <div class="stat-card"><div class="stat-icon" style="color:var(--red)"><i class="fa fa-credit-card"></i></div><div class="stat-label">Total Expenses</div><div class="stat-value" id="totalExpenses">₹0</div></div>
+      <div class="stat-card"><div class="stat-icon" style="color:var(--green)"><i class="fa fa-chart-line"></i></div><div class="stat-label">Net Profit</div><div class="stat-value" id="netProfit" style="color:var(--green)">₹0</div></div>
+      <div class="stat-card"><div class="stat-icon" style="color:var(--blue)"><i class="fa fa-user-graduate"></i></div><div class="stat-label">Total Students</div><div class="stat-value" id="totalStudents">0</div></div>
+    </div>
+
+    <div class="card"><h3>Income vs Expenses</h3><canvas id="reportChart"></canvas></div>
+
+    <div class="card">
+      <h3>Recent Transactions</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Description</th><th>Type</th><th>Amount</th></tr></thead>
+          <tbody id="transactionsTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
 </div>
 
-</div>
-
-<div class="main">
-
-<h1>Financial Reports</h1>
-<p>Track income, expenses and overall earnings</p>
-
-<!-- Controls -->
-
-<div class="controls">
-
-<div>
-<label>Select Report:</label>
-
-<select id="reportType" onchange="onReportTypeChange()">
-<option value="monthly">Monthly</option>
-<option value="yearly">Yearly</option>
-</select>
-
-</div>
-
-<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-<select id="reportYear" onchange="changeReport()"></select>
-<select id="reportMonth" onchange="changeReport()">
-<option value="1">Jan</option>
-<option value="2">Feb</option>
-<option value="3">Mar</option>
-<option value="4">Apr</option>
-<option value="5">May</option>
-<option value="6">Jun</option>
-<option value="7">Jul</option>
-<option value="8">Aug</option>
-<option value="9">Sep</option>
-<option value="10">Oct</option>
-<option value="11">Nov</option>
-<option value="12">Dec</option>
-</select>
-</div>
-
-<div>
-
-<button class="btn refresh" onclick="loadAllReportData()">
-<i class="fa fa-refresh"></i> Refresh Data
-</button>
-
-<button class="btn download" onclick="downloadCSV()">
-<i class="fa fa-download"></i> Download CSV
-</button>
-
-<button class="btn print" onclick="window.print()">
-<i class="fa fa-print"></i> Print
-</button>
-
-</div>
-
-</div>
-
-<div class="card" style="margin-top:20px;">
-<h3 style="margin-bottom:15px">Add Expense</h3>
-<div style="display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:12px; align-items:end;">
-<input type="number" id="transactionAmount" placeholder="Amount" min="0" step="0.01">
-<select id="transactionCategory">
-<option value="rent">Rent</option>
-<option value="electricity">Electricity</option>
-<option value="maintenance">Maintenance</option>
-<option value="marketing">Marketing</option>
-<option value="salary">Salary</option>
-<option value="other">Other</option>
-</select>
-<input type="text" id="transactionDescription" placeholder="Description">
-<button class="btn download" onclick="addExpense()" style="width:100%;">Add Expense</button>
-</div>
-</div>
-
-<div class="card" style="margin-top:20px;">
-<h3 style="margin-bottom:15px">Category-wise Expenses</h3>
-<div id="categoryBreakdown" style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;"></div>
-</div>
-
-<!-- Stats -->
-
-<div class="stats">
-
-<div class="stat-card">
-<div class="icon"><i class="fa fa-money-bill"></i></div>
-<h4>Total Revenue</h4>
-<h2 id="totalRevenue">₹0</h2>
-</div>
-
-<div class="stat-card">
-<div class="icon"><i class="fa fa-credit-card"></i></div>
-<h4>Total Expenses</h4>
-<h2 id="totalExpenses">₹0</h2>
-</div>
-
-<div class="stat-card">
-<div class="icon"><i class="fa fa-chart-line"></i></div>
-<h4>Net Profit</h4>
-<h2 style="color:green;" id="netProfit">₹0</h2>
-</div>
-
-<div class="stat-card">
-<div class="icon"><i class="fa fa-user-graduate"></i></div>
-<h4>Total Students</h4>
-<h2 id="totalStudents">0</h2>
-</div>
-
-</div>
-
-<!-- Chart -->
-
-<div class="card">
-
-<h3 style="margin-bottom:15px">Income vs Expenses</h3>
-
-<canvas id="reportChart"></canvas>
-
-</div>
-
-<!-- Table -->
-
-<div class="card">
-
-<h3 style="margin-bottom:15px">Recent Transactions</h3>
-
-<table>
-
-<tr>
-<th>Date</th>
-<th>Description</th>
-<th>Type</th>
-<th>Amount</th>
-</tr>
-
-<tbody id="transactionsTable">
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-<script src="./api.js"></script>
+<script src="/api.js"></script>
+<script src="../shared.js"></script>
 
 <script>
 
