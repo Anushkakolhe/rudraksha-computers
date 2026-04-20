@@ -3,216 +3,609 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Courses – Rudraksha</title>
+
+<title>Courses - Rudraksha</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="../shared.css">
+
 <style>
-.course-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
-.course-card-top { background:var(--primary-light); padding:18px 20px; }
-.course-card-top h3 { font-size:17px; font-weight:600; }
-.course-card-body { padding:18px 20px; }
-.course-row { display:flex; justify-content:space-between; font-size:14px; margin-bottom:10px; }
-.price { color:var(--primary); font-weight:600; }
-.btn-group { display:flex; gap:8px; margin-top:12px; }
-.btn-group .btn { flex:1; justify-content:center; }
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+display:flex;
+background:#f4f6f9;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:240px;
+background:#fff;
+height:100vh;
+padding:20px;
+box-shadow:2px 0 10px rgba(0,0,0,0.05);
+position:relative;
+}
+
+.logo{
+font-size:20px;
+font-weight:600;
+color:#ff7a00;
+margin-bottom:30px;
+}
+
+.menu{
+list-style:none;
+}
+
+.menu li{
+padding:12px;
+margin-bottom:10px;
+border-radius:8px;
+cursor:pointer;
+color:#555;
+transition:0.3s;
+}
+
+.menu li i{
+margin-right:10px;
+}
+
+.menu li:hover,
+.menu li.active{
+background:#fde6cf;
+color:#ff7a00;
+transform:translateX(5px);
+}
+
+.admin-box{
+position:absolute;
+bottom:20px;
+left:20px;
+right:20px;
+background:#f4f6f9;
+padding:10px;
+border-radius:8px;
+font-size:13px;
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:30px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.add-btn{
+background:#ff7a00;
+color:#fff;
+border:none;
+padding:12px 18px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.add-btn:hover{
+transform:scale(1.05);
+background:#e66900;
+}
+
+/* Search */
+
+.search-box{
+background:#fff;
+padding:15px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+margin-bottom:25px;
+}
+
+.search-box input{
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+/* Grid */
+
+.course-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+/* Card */
+
+.card{
+background:#fff;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+overflow:hidden;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+.card-top{
+background:#fff3e6;
+padding:20px;
+}
+
+.card-top h3{
+font-size:18px;
+}
+
+.card-top p{
+font-size:14px;
+color:#555;
+margin-top:5px;
+}
+
+.card-body{
+padding:20px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+font-size:14px;
+}
+
+.price{
+color:#ff7a00;
+font-weight:600;
+}
+
+.status{
+background:#e6f4ea;
+color:#1e8e3e;
+padding:3px 8px;
+border-radius:20px;
+font-size:12px;
+}
+
+.instructor{
+margin:10px 0;
+font-size:14px;
+}
+
+.btn-group{
+display:flex;
+gap:10px;
+}
+
+.btn{
+flex:1;
+padding:10px;
+border-radius:8px;
+border:none;
+cursor:pointer;
+}
+
+.view{
+background:#ff7a00;
+color:white;
+}
+
+.edit{
+background:#2979ff;
+color:white;
+}
+
+.delete{
+background:#ff4d4d;
+color:white;
+}
+
+.btn:hover{
+opacity:0.9;
+}
+
+/* Modal */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:#fff;
+padding:25px;
+border-radius:10px;
+width:400px;
+}
+
+.modal-content h3{
+margin-bottom:15px;
+}
+
+.modal-content input,
+.modal-content textarea{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.modal-content button{
+width:100%;
+background:#ff7a00;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+}
+
 </style>
 </head>
+
 <body>
 
-<nav class="topnav">
-  <span class="logo-text">RC Rudraksha</span>
-  <div class="topnav-right">
-    <button class="dark-toggle">🌙</button>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<!-- Sidebar -->
 
-<div class="app-shell">
-  <aside class="sidebar">
-    <div class="logo">RC Rudraksha</div>
-    <ul class="menu">
-      <li><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Dashboard</a></li>
-      <li><a href="students.html"><i class="fa-solid fa-user-graduate"></i>Students</a></li>
-      <li class="active"><a href="courses.html"><i class="fa-solid fa-book"></i>Courses</a></li>
-      <li><a href="packages.html"><i class="fa-solid fa-box"></i>Packages</a></li>
-      <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i>Attendance</a></li>
-      <li><a href="report.html"><i class="fa-solid fa-chart-pie"></i>Reports</a></li>
-      <li><a href="setting.html"><i class="fa-solid fa-gear"></i>Settings</a></li>
-    </ul>
-    <div class="admin-box"><strong>Admin User</strong><br>admin@rudraksha.com</div>
-  </aside>
+<div class="sidebar">
 
-  <main class="main">
-    <div class="page-header">
-      <div><h2>Courses</h2><p>Manage all courses and training programs</p></div>
-      <div class="header-actions">
-        <button class="btn btn-primary" onclick="openModal()"><i class="fa-solid fa-plus"></i> Add Course</button>
-        <button class="dark-toggle">🌙</button>
-      </div>
-    </div>
+<div class="logo">RC Rudraksha</div>
 
-    <div class="search-bar">
-      <i class="fa-solid fa-search" style="color:var(--text-muted)"></i>
-      <input type="text" id="searchCourses" placeholder="Search courses…" oninput="searchCourses()">
-    </div>
+<ul class="menu">
 
-    <div class="course-grid" id="courseGrid"></div>
-  </main>
+<li>
+<a href="dashboard.html">
+<i class="fa-solid fa-chart-line"></i>Dashboard
+</a>
+</li>
+
+<li>
+<a href="students.html">
+<i class="fa-solid fa-user-graduate"></i>Students
+</a>
+</li>
+
+<li class="active">
+<a href="courses.html">
+<i class="fa-solid fa-book"></i>Courses
+</a>
+</li>
+
+<li>
+<a href="packages.html">
+<i class="fa-solid fa-box"></i>Packages
+</a>
+</li>
+
+<li>
+<a href="attendance.html">
+<i class="fa-solid fa-calendar-check"></i>Attendance
+</a>
+</li>
+
+<li>
+<a href="report.html">
+<i class="fa-solid fa-chart-pie"></i>Reports
+</a>
+</li>
+
+<li>
+<a href="setting.html">
+<i class="fa-solid fa-gear"></i>Settings
+</a>
+</li>
+
+</ul>
+
+<div class="admin-box">
+<strong>Admin User</strong><br>
+admin@rudraksha.com
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+
+<div>
+<h2>Courses</h2>
+<p>Manage all courses and training programs</p>
+</div>
+
+<button class="add-btn" onclick="openModal()">+ Add Course</button>
+
+</div>
+
+<div class="search-box">
+<input type="text" placeholder="Search courses..." id="searchCourses" onkeyup="searchCourses()">
+</div>
+
+<div class="course-grid" id="courseGrid">
+
 </div>
 
 <!-- Course Modal -->
+
 <div class="modal" id="courseModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3 id="modalTitle">Add Course</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="form-group"><label>Course Name *</label><input type="text" id="courseName" placeholder="e.g. Web Development"></div>
-    <div class="form-group"><label>Description *</label><textarea id="description" rows="3" placeholder="Course description" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px;outline:none;resize:vertical;"></textarea></div>
-    <div class="form-group"><label>Duration *</label><input type="text" id="duration" placeholder="e.g. 3 Months"></div>
-    <div class="form-group"><label>Fees (₹) *</label><input type="number" id="fees" placeholder="0" min="0"></div>
-    <div class="form-group"><label>Instructor</label><input type="text" id="instructor" placeholder="Instructor name"></div>
-    <div class="form-group"><label>Capacity</label><input type="number" id="capacity" value="50" min="1"></div>
-    <button class="btn btn-primary btn-full" onclick="saveCourse()">Save Course</button>
-  </div>
+
+<div class="modal-content">
+
+<div style="display:flex; justify-content:space-between; align-items:center;">
+  <h3 id="modalTitle">Add Course</h3>
+  <i class="fa fa-times" onclick="closeModal()" style="cursor:pointer; font-size:20px;"></i>
+</div>
+
+<input type="text" id="courseName" placeholder="Course Name" required>
+<textarea id="description" placeholder="Description" rows="3"></textarea>
+<input type="text" id="duration" placeholder="Duration" required>
+<input type="number" id="fees" placeholder="Fees" required>
+<input type="text" id="instructor" placeholder="Instructor">
+<input type="number" id="capacity" placeholder="Capacity" value="50">
+
+<button onclick="saveCourse()">Save Course</button>
+
+</div>
+
 </div>
 
 <!-- Content Modal -->
+
 <div class="modal" id="contentModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3 id="contentTitle"></h3>
-      <button class="modal-close" onclick="closeContentModal()">✕</button>
-    </div>
-    <p id="contentDescription" style="line-height:1.7;color:var(--text-muted);font-size:14px;margin-bottom:16px;"></p>
-    <button class="btn btn-primary btn-full" onclick="closeContentModal()">Close</button>
-  </div>
+
+<div class="modal-content">
+
+<div style="display:flex; justify-content:space-between; align-items:center;">
+  <h3 id="contentTitle"></h3>
+  <i class="fa fa-times" onclick="closeContentModal()" style="cursor:pointer; font-size:20px;"></i>
+</div>
+
+<p id="contentDescription" style="line-height:1.6; color:#555; margin:15px 0;"></p>
+
+<button onclick="closeContentModal()" style="width:100%; background:#ff7a00; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">Close</button>
+
+</div>
+
+</div>
+
 </div>
 
 </body>
 
-<script src="/api.js"></script>
-<script src="../shared.js"></script>
-<script>
-if (!localStorage.getItem("token")) window.location.href = "login.html";
+<script src="./api.js"></script>
 
-let allCourses = [], courseStudentCount = {};
+<script>
+
+if(!localStorage.getItem("token")){
+  window.location.href="login.html";
+}
+
+let allCourses = [];
+let courseStudentCount = {};
 
 document.addEventListener("DOMContentLoaded", loadCourses);
 
-async function loadCourses() {
-  showSpinner();
-  const [cr, sr] = await Promise.all([API.courses.getAll(), API.ownerStudents.getAll()]);
-  hideSpinner();
-  if (cr.success) allCourses = cr.courses || [];
-  if (sr.success) {
+async function loadCourses(){
+  const [coursesResult, studentsResult] = await Promise.all([
+    API.courses.getAll(),
+    API.ownerStudents.getAll()
+  ]);
+
+  if(coursesResult.success && coursesResult.courses){
+    allCourses = coursesResult.courses;
+  }
+
+  if(studentsResult.success && studentsResult.students){
     courseStudentCount = {};
-    (sr.students || []).forEach(s => {
-      if (s.course?._id) courseStudentCount[s.course._id] = (courseStudentCount[s.course._id] || 0) + 1;
+    studentsResult.students.forEach(student => {
+      if(student.course?._id){
+        const courseId = student.course._id;
+        courseStudentCount[courseId] = (courseStudentCount[courseId] || 0) + 1;
+      }
+      if(student.package?._id){
+        // Track package enrollments separately
+        const packageId = student.package._id;
+        courseStudentCount[`pkg_${packageId}`] = (courseStudentCount[`pkg_${packageId}`] || 0) + 1;
+      }
     });
   }
+
   displayCourses(allCourses);
 }
 
-function displayCourses(courses) {
+function displayCourses(courses){
   const grid = document.getElementById("courseGrid");
-  if (!courses.length) { grid.innerHTML = "<p style='padding:30px;color:var(--text-muted)'>No courses found</p>"; return; }
-  grid.innerHTML = courses.map(c => {
-    const count = courseStudentCount[c._id] || 0;
-    return `
-    <div class="card course-card" style="padding:0;overflow:hidden;">
-      <div class="course-card-top"><h3>${c.courseName}</h3></div>
-      <div class="course-card-body">
-        <div class="course-row"><span>${c.duration}</span><span class="price">₹${c.fees}</span></div>
-        <div class="course-row">
-          <span>${count} Student${count !== 1 ? "s" : ""}</span>
-          <span class="badge badge-green">${c.status === "active" ? "Active" : "Inactive"}</span>
+  grid.innerHTML = "";
+  
+  if(courses.length === 0){
+    grid.innerHTML = "<p style='text-align:center; padding:30px;'>No courses found</p>";
+    return;
+  }
+  
+  courses.forEach(course => {
+    const studentCount = courseStudentCount[course._id] || 0;
+    const card = `
+    <div class="card">
+      <div class="card-top">
+        <h3>${course.courseName}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <span>${course.duration}</span>
+          <span class="price">₹${course.fees}</span>
         </div>
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">
-          Instructor: <strong>${c.instructor || "Not assigned"}</strong>
+        <div class="row">
+          <span>${studentCount} Student${studentCount !== 1 ? 's' : ''}</span>
+          <span class="status">${course.status === 'active' ? 'Active' : 'Inactive'}</span>
+        </div>
+        <div class="instructor">
+          Instructor: <strong>${course.instructor || "Not assigned"}</strong>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary btn-sm" onclick="viewContent('${c._id}')">View</button>
-          <button class="btn btn-blue btn-sm" onclick="editCourse('${c._id}')">Edit</button>
-          <button class="btn btn-red btn-sm" onclick="deleteCourse('${c._id}')">Delete</button>
+          <button class="btn view" onclick="viewContent('${course._id}')">View Content</button>
+          <button class="btn edit" onclick="editCourse('${course._id}')">Edit</button>
+          <button class="btn delete" onclick="deleteCourse('${course._id}')">Delete</button>
         </div>
       </div>
-    </div>`;
-  }).join("");
+    </div>
+    `;
+    grid.innerHTML += card;
+  });
 }
 
-function searchCourses() {
-  const q = document.getElementById("searchCourses").value.toLowerCase();
-  displayCourses(allCourses.filter(c => c.courseName.toLowerCase().includes(q)));
+function searchCourses(){
+  const query = document.getElementById("searchCourses").value.toLowerCase();
+  const filtered = allCourses.filter(course => 
+    course.courseName.toLowerCase().includes(query)
+  );
+  displayCourses(filtered);
 }
 
-async function viewContent(id) {
-  const r = await API.courses.get(id);
-  if (r.success && r.course) {
-    document.getElementById("contentTitle").innerText = r.course.courseName;
-    document.getElementById("contentDescription").innerText = r.course.description || "No content available";
-    document.getElementById("contentModal").classList.add("open");
+async function viewContent(courseId){
+  const result = await API.courses.get(courseId);
+
+  if(result.success && result.course){
+    const course = result.course;
+    document.getElementById("contentTitle").innerText = course.courseName;
+    document.getElementById("contentDescription").innerText = course.description || "No content available";
+    document.getElementById("contentModal").style.display = "flex";
+  } else {
+    alert("Unable to load course content");
   }
 }
 
-function closeContentModal() { document.getElementById("contentModal").classList.remove("open"); }
+function closeContentModal(){
+  document.getElementById("contentModal").style.display = "none";
+}
 
-async function deleteCourse(id) {
-  if (!confirm("Delete this course?")) return;
-  const r = await API.courses.delete(id);
-  r.success ? (showToast("Course deleted"), loadCourses()) : showToast(r.message, "error");
+async function deleteCourse(courseId){
+  if(!confirm("Are you sure you want to delete this course?")){
+    return;
+  }
+  
+  const result = await API.courses.delete(courseId);
+  
+  if(result.success){
+    alert("Course deleted successfully");
+    loadCourses();
+  } else {
+    alert("Error: " + result.message);
+  }
 }
 
 let editingCourseId = null;
 
-function openModal(id = null) {
-  editingCourseId = id;
-  document.getElementById("modalTitle").textContent = id ? "Update Course" : "Add Course";
-  if (!id) clearForm(); else loadCourseForEdit(id);
-  document.getElementById("courseModal").classList.add("open");
-}
-
-function editCourse(id) { openModal(id); }
-function closeModal() { document.getElementById("courseModal").classList.remove("open"); editingCourseId = null; }
-
-function clearForm() {
-  ["courseName","description","duration","fees","instructor"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("capacity").value = "50";
-}
-
-async function loadCourseForEdit(id) {
-  const r = await API.courses.get(id);
-  if (r.success && r.course) {
-    const c = r.course;
-    document.getElementById("courseName").value = c.courseName;
-    document.getElementById("description").value = c.description || "";
-    document.getElementById("duration").value = c.duration;
-    document.getElementById("fees").value = c.fees;
-    document.getElementById("instructor").value = c.instructor || "";
-    document.getElementById("capacity").value = c.capacity || 50;
+function openModal(courseId = null){
+  document.getElementById("courseModal").style.display="flex";
+  if(courseId){
+    editingCourseId = courseId;
+    document.getElementById("modalTitle").textContent = "Update Course";
+    loadCourseForEdit(courseId);
+  } else {
+    editingCourseId = null;
+    document.getElementById("modalTitle").textContent = "Add Course";
+    clearForm();
   }
 }
 
-async function saveCourse() {
+function closeModal(){
+  document.getElementById("courseModal").style.display="none";
+  clearForm();
+  editingCourseId = null;
+}
+
+function clearForm(){
+  document.getElementById("courseName").value="";
+  document.getElementById("description").value="";
+  document.getElementById("duration").value="";
+  document.getElementById("fees").value="";
+  document.getElementById("instructor").value="";
+  document.getElementById("capacity").value="50";
+}
+
+async function loadCourseForEdit(courseId){
+  const result = await API.courses.get(courseId);
+  if(result.success && result.course){
+    const course = result.course;
+    document.getElementById("courseName").value = course.courseName;
+    document.getElementById("description").value = course.description || "";
+    document.getElementById("duration").value = course.duration;
+    document.getElementById("fees").value = course.fees;
+    document.getElementById("instructor").value = course.instructor || "";
+    document.getElementById("capacity").value = course.capacity || 50;
+  }
+}
+
+async function saveCourse(){
   const courseName = document.getElementById("courseName").value.trim();
   const description = document.getElementById("description").value.trim();
   const duration = document.getElementById("duration").value.trim();
   const fees = parseFloat(document.getElementById("fees").value);
-  if (!courseName || !description || !duration || !fees) {
-    showToast("Please fill all required fields", "error"); return;
+  const instructor = document.getElementById("instructor").value.trim();
+  const capacity = parseInt(document.getElementById("capacity").value);
+
+  if(!courseName || !description || !duration || !fees){
+    alert("Please fill all required fields including description");
+    return;
   }
-  const data = { courseName, description, duration, fees,
-    instructor: document.getElementById("instructor").value.trim(),
-    capacity: parseInt(document.getElementById("capacity").value) || 50 };
-  showSpinner();
-  const r = editingCourseId ? await API.courses.update(editingCourseId, data) : await API.courses.add(data);
-  hideSpinner();
-  r.success ? (showToast(editingCourseId ? "Course updated" : "Course added"), closeModal(), loadCourses())
-            : showToast(r.message, "error");
+
+  const courseData = {
+    courseName,
+    description,
+    duration,
+    fees,
+    instructor,
+    capacity: capacity || 50,
+  };
+
+  let result;
+  if(editingCourseId){
+    result = await API.courses.update(editingCourseId, courseData);
+  } else {
+    result = await API.courses.add(courseData);
+  }
+  
+  if(result.success){
+    alert(editingCourseId ? "Course updated successfully" : "Course added successfully");
+    closeModal();
+    loadCourses();
+  } else {
+    alert("Error: " + result.message);
+  }
 }
+
+function editCourse(courseId){
+  openModal(courseId);
+}
+
 </script>
+
 </html>
