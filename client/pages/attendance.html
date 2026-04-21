@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="../responsive.css">
 
 <style>
 
@@ -188,15 +187,6 @@ font-weight:500;
 </head>
 
 <body>
-
-<!-- Mobile top bar -->
-<div class="mob-topbar">
-  <span class="mob-logo">RC Rudraksha</span>
-  <button class="mob-hamburger" id="mobHamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</div>
-<div class="mob-overlay" id="mobOverlay"></div>
 
 <!-- Sidebar -->
 
@@ -434,18 +424,6 @@ async function saveAttendance(){
   await loadAttendance();
 }
 
-</script>
-
-<script>
-(function(){
-  var btn=document.getElementById('mobHamburger'),overlay=document.getElementById('mobOverlay'),sidebar=document.querySelector('.sidebar');
-  if(!btn||!sidebar)return;
-  function open(){sidebar.classList.add('mob-open');overlay.classList.add('visible');btn.classList.add('open');}
-  function close(){sidebar.classList.remove('mob-open');overlay.classList.remove('visible');btn.classList.remove('open');}
-  btn.addEventListener('click',function(){sidebar.classList.contains('mob-open')?close():open();});
-  overlay.addEventListener('click',close);
-  sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(window.innerWidth<=768)close();});});
-})();
 </script>
 
 </html>
